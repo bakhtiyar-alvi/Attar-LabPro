@@ -1,0 +1,3805 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="AttarLab Pro - Professional Attar, Essential Oil & Perfumery Formulation Studio">
+  <meta name="theme-color" content="#0a0c10">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./logo.svg">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <title>AttarLab Pro | Perfumery & Attar Studio</title>
+  <style>
+    :root {
+      --bg-base: #090b0e;
+      --bg-surface: #11141b;
+      --bg-elevated: #171b24;
+      --bg-card: #1c212c;
+      --bg-input: #10131a;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-gold: rgba(212, 175, 55, 0.28);
+      --accent-gold: #d4af37;
+      --accent-gold-bright: #e6c65a;
+      --accent-gold-soft: rgba(212, 175, 55, 0.14);
+      --accent-amber: #d9822b;
+      --text-primary: #f4f1ea;
+      --text-secondary: #a6a092;
+      --text-muted: #6e695f;
+      --status-ok: #3ea874;
+      --status-ok-bg: rgba(62, 168, 116, 0.14);
+      --status-warn: #e09f3e;
+      --status-warn-bg: rgba(224, 159, 62, 0.14);
+      --status-err: #d9534f;
+      --status-err-bg: rgba(217, 83, 79, 0.14);
+      --font-display: Georgia, "Times New Roman", serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-card: 0 6px 24px rgba(0, 0, 0, 0.38);
+      --nav-height: 64px;
+      --topbar-height: 56px;
+    }
+
+    [data-theme="light"] {
+      --bg-base: #f4f1ea;
+      --bg-surface: #ebe5d8;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #f5f2eb;
+      --border-subtle: rgba(0, 0, 0, 0.09);
+      --border-gold: rgba(158, 123, 34, 0.35);
+      --accent-gold: #9e7b22;
+      --accent-gold-bright: #7d5f14;
+      --accent-gold-soft: rgba(158, 123, 34, 0.12);
+      --text-primary: #1a1815;
+      --text-secondary: #5c564b;
+      --text-muted: #8c8578;
+      --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.45;
+      overscroll-behavior: none;
+    }
+
+    /* App Shell Layout */
+    .app-shell {
+      display: flex;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Desktop Sidebar */
+    .sidebar {
+      width: 248px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 30;
+    }
+
+    .brand-box {
+      padding: 18px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-crest {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(212,175,55,0.22), rgba(212,175,55,0.05));
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--accent-gold);
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-secondary);
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 8px;
+      list-style: none;
+    }
+
+    .nav-section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding: 10px 10px 4px;
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      margin-bottom: 2px;
+    }
+
+    .nav-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-gold-soft);
+      color: var(--text-primary);
+    }
+
+    .nav-btn.active {
+      background: var(--accent-gold-soft);
+      border-color: var(--border-gold);
+      color: var(--accent-gold-bright);
+      font-weight: 600;
+    }
+
+    /* Main Workspace Area */
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Top Header Bar */
+    .topbar {
+      height: var(--topbar-height);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      gap: 8px;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .mobile-crest {
+      display: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: var(--accent-gold-soft);
+      border: 1px solid var(--border-gold);
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .screen-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Scrollable Viewport */
+    .viewport {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Buttons & Badges */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .btn-gold {
+      background: linear-gradient(180deg, var(--accent-gold-bright), var(--accent-gold));
+      color: #090b0e;
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-gold:active { transform: scale(0.98); }
+
+    .btn-outline {
+      background: var(--bg-elevated);
+      border-color: var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover, .btn-outline:active {
+      border-color: var(--border-gold);
+      color: var(--accent-gold-bright);
+    }
+
+    .btn-danger {
+      background: var(--status-err-bg);
+      border-color: rgba(217, 83, 79, 0.4);
+      color: #ff8582;
+    }
+
+    .btn-sm {
+      padding: 5px 9px;
+      font-size: 11.5px;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: var(--radius-sm);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .pill-ok { background: var(--status-ok-bg); color: #5ce09b; border: 1px solid rgba(62, 168, 116, 0.35); }
+    .pill-warn { background: var(--status-warn-bg); color: #ffc164; border: 1px solid rgba(224, 159, 62, 0.35); }
+    .pill-err { background: var(--status-err-bg); color: #ff8582; border: 1px solid rgba(217, 83, 79, 0.35); }
+
+    /* KPI / Summary HUD Grid */
+    .hud-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .hud-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hud-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .hud-val {
+      font-family: var(--font-mono);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .hud-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Studio Split Layout */
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .panel-head {
+      padding: 12px 14px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-body {
+      padding: 14px;
+    }
+
+    /* Inputs & Controls */
+    .input, .select {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 8px 11px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .input:focus, .select:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .input-mono {
+      font-family: var(--font-mono);
+      text-align: right;
+    }
+
+    /* Formula Meta Toolbar */
+    .formula-toolbar {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Ingredient Formulation Card List (Mobile & Desktop Friendly) */
+    .ing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .ing-row-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      transition: border-color 0.15s;
+    }
+
+    .ing-row-card.is-locked {
+      border-color: rgba(212, 175, 55, 0.35);
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.05), transparent);
+    }
+
+    .ing-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ing-row-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .lock-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .lock-toggle.locked {
+      color: var(--accent-gold);
+      border-color: var(--border-gold);
+      background: var(--accent-gold-soft);
+    }
+
+    .ing-name {
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ing-cat-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .ing-mass-readout {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-gold-bright);
+      background: var(--accent-gold-soft);
+      padding: 3px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .ing-row-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .range-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-gold-bright);
+      border: 2px solid #090b0e;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    .range-slider:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .step-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-btn:active {
+      background: var(--accent-gold-soft);
+      border-color: var(--border-gold);
+    }
+
+    .pct-input-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding-right: 6px;
+      width: 82px;
+      flex-shrink: 0;
+    }
+
+    .pct-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 4px 5px 6px;
+      text-align: right;
+      outline: none;
+    }
+
+    .pct-unit {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Visualizations & Note Pyramid */
+    .radar-stage {
+      width: 100%;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 8px;
+    }
+
+    .pyramid-stack {
+      display: flex;
+      height: 22px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      margin: 10px 0 8px;
+      background: var(--bg-surface);
+    }
+
+    .pyr-bar-top { background: linear-gradient(90deg, #4ea8de, #56cfe1); transition: width 0.25s; }
+    .pyr-bar-heart { background: linear-gradient(90deg, #e07a5f, #f2cc8f); transition: width 0.25s; }
+    .pyr-bar-base { background: linear-gradient(90deg, #9c6644, #d4af37); transition: width 0.25s; }
+
+    .pyramid-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+
+    .pyr-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 6px;
+      font-size: 11px;
+    }
+
+    /* Accord Profile Bars */
+    .profile-bar-row {
+      display: grid;
+      grid-template-columns: 74px 1fr 38px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 11.5px;
+    }
+
+    .profile-track {
+      height: 7px;
+      background: var(--bg-surface);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .profile-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-amber), var(--accent-gold-bright));
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    /* Mobile Bottom Navigation & Drawer */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: rgba(17, 20, 27, 0.96);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-subtle);
+      z-index: 45;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mob-tab {
+      flex: 1;
+      height: 100%;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .mob-tab svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .mob-tab.active {
+      color: var(--accent-gold-bright);
+    }
+
+    /* Modal & Bottom Sheet System */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 14px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 560px;
+      max-height: 86dvh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+      overflow: hidden;
+    }
+
+    .modal-head {
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Responsive Tables (For Desktop & Scrollable Cards) */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 480px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .data-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+    }
+
+    /* Mobile Android Breakpoints */
+    @media (max-width: 920px) {
+      .sidebar { display: none; }
+      .mobile-crest { display: inline-flex; }
+      .mobile-bottom-nav { display: flex; }
+      .viewport {
+        padding: 10px 10px calc(var(--nav-height) + env(safe-area-inset-bottom, 0px) + 16px) 10px;
+      }
+      .hud-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .studio-layout {
+        grid-template-columns: 1fr;
+      }
+      .formula-toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+      .formula-toolbar .field-group:first-child {
+        grid-column: 1 / -1;
+      }
+      .ing-row-top {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media print {
+      .sidebar, .topbar, .mobile-bottom-nav, .no-print { display: none !important; }
+      html, body, .app-shell, .main-area, .viewport {
+        height: auto !important;
+        overflow: visible !important;
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .panel, .ing-row-card, .hud-card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-box">
+        <div class="brand-crest">
+          <svg style="width:20px;height:20px;fill:currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C10.89 2 10 2.89 10 4V7.17C7.61 8.58 6 11.1 6 14C6 17.31 8.69 20 12 20C15.31 20 18 17.31 18 14C18 11.1 16.39 8.58 14 7.17V4C14 2.89 13.11 2 12 2Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">ATTARLAB PRO</div>
+          <div class="brand-tag">Formulation Studio</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-section-label">Core Workspace</li>
+        <li><button class="nav-btn" data-nav="dashboard"><svg viewBox="0 0 24 24"><path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/></svg>Dashboard</button></li>
+        <li><button class="nav-btn active" data-nav="studio"><svg viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M17 11H7V9H17V11M13 15H7V13H13V15Z"/></svg>Formulation Studio</button></li>
+        <li><button class="nav-btn" data-nav="ingredients"><svg viewBox="0 0 24 24"><path d="M12 3A9 9 0 0 0 3 12A9 9 0 0 0 12 21A9 9 0 0 0 21 12A9 9 0 0 0 12 3M13 7H11V13H17V11H13V7Z"/></svg>Ingredient Library</button></li>
+        <li><button class="nav-btn" data-nav="analyzer"><svg viewBox="0 0 24 24"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>Accord & Recommendations</button></li>
+
+        <li class="nav-section-label">Production & Lab</li>
+        <li><button class="nav-btn" data-nav="attar"><svg viewBox="0 0 24 24"><path d="M12 2C9 7 6 10.5 6 14.5C6 17.8 8.7 20.5 12 20.5C15.3 20.5 18 17.8 18 14.5C18 10.5 15 7 12 2Z"/></svg>Traditional Attar Deg Log</button></li>
+        <li><button class="nav-btn" data-nav="batch"><svg viewBox="0 0 24 24"><path d="M19 3H5A2 2 0 0 0 3 5V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V5A2 2 0 0 0 19 3M19 7L12 12L5 7V5L12 10L19 5V7Z"/></svg>Batch Compounding</button></li>
+        <li><button class="nav-btn" data-nav="dilution"><svg viewBox="0 0 24 24"><path d="M7 2V4H8V11C8 12.1 8.9 13 10 13H11V18H8V20H16V18H13V13H14C15.1 13 16 12.1 16 11V4H17V2H7Z"/></svg>Dilution Calculator</button></li>
+        <li><button class="nav-btn" data-nav="comparison"><svg viewBox="0 0 24 24"><path d="M10 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H10V23H12V1H10V3M19 3H14V5H19V19H14V21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z"/></svg>Formula Comparison</button></li>
+        <li><button class="nav-btn" data-nav="costing"><svg viewBox="0 0 24 24"><path d="M11.8 10.9C9.53 10.31 8.8 9.7 8.8 8.75C8.8 7.66 9.81 6.9 11.5 6.9C13.28 6.9 13.94 7.75 14 9H16.21C16.14 7.28 15.09 5.7 13 5.19V3H10V5.16C8.06 5.58 6.5 6.84 6.5 8.77C6.5 11.08 8.41 12.23 11.2 12.9C13.7 13.5 14.2 14.38 14.2 15.31C14.2 16 13.71 17.1 11.5 17.1C9.44 17.1 8.63 16.18 8.52 15H6.32C6.44 17.19 8.08 18.42 10 18.83V21H13V18.85C14.95 18.48 16.5 17.35 16.5 15.3C16.5 12.46 14.07 11.49 11.8 10.9Z"/></svg>Cost & Inventory</button></li>
+
+        <li class="nav-section-label">Governance & Archive</li>
+        <li><button class="nav-btn" data-nav="library"><svg viewBox="0 0 24 24"><path d="M4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6M20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"/></svg>Formula Library</button></li>
+        <li><button class="nav-btn" data-nav="safety"><svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>Safety & IFRA Review</button></li>
+        <li><button class="nav-btn" data-nav="tests"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"/></svg>QA Math Verification</button></li>
+        <li><button class="nav-btn" data-nav="settings"><svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97L21.54 14.63L19.54 18.09L17.05 17.09C16.53 17.49 15.99 17.82 15.36 18.08L14.99 20.73H10.99L10.62 18.08C9.99 17.83 9.45 17.49 8.93 17.09L6.44 18.09L4.44 14.63L6.55 12.97C6.5 12.33 6.5 11.67 6.55 11L4.44 9.37L6.44 5.91L8.93 6.91C9.45 6.51 9.99 6.17 10.62 5.92L10.99 3.27H14.99L15.36 5.92C15.99 6.17 16.53 6.51 17.05 6.91L19.54 5.91L21.54 9.37L19.43 11C19.48 11.67 19.48 12.33 19.43 12.97Z"/></svg>Backup & Settings</button></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Column -->
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="mobile-crest">
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C10.89 2 10 2.89 10 4V7.17C7.61 8.58 6 11.1 6 14C6 17.31 8.69 20 12 20C15.31 20 18 17.31 18 14C18 11.1 16.39 8.58 14 7.17V4C14 2.89 13.11 2 12 2Z"/></svg>
+          </div>
+          <h1 class="screen-title" id="topbar-title">Formulation Studio</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="status-pill pill-ok" id="sync-badge">Saved</span>
+          <button class="btn btn-outline btn-sm" id="btn-export-csv" title="Export Formula CSV">CSV</button>
+          <button class="btn btn-gold btn-sm" id="btn-save-now">Save</button>
+        </div>
+      </header>
+
+      <main class="viewport" id="app-viewport">
+        <!-- Dynamically rendered screen content -->
+      </main>
+    </div>
+  </div>
+
+  <!-- Android Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="Primary Mobile Navigation">
+    <button class="mob-tab" data-nav="dashboard">
+      <svg viewBox="0 0 24 24"><path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="mob-tab active" data-nav="studio">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M17 11H7V9H17V11M13 15H7V13H13V15Z"/></svg>
+      <span>Studio</span>
+    </button>
+    <button class="mob-tab" data-nav="ingredients">
+      <svg viewBox="0 0 24 24"><path d="M12 3A9 9 0 0 0 3 12A9 9 0 0 0 12 21A9 9 0 0 0 21 12A9 9 0 0 0 12 3M13 7H11V13H17V11H13V7Z"/></svg>
+      <span>Materials</span>
+    </button>
+    <button class="mob-tab" data-nav="batch">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5A2 2 0 0 0 3 5V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V5A2 2 0 0 0 19 3M19 7L12 12L5 7V5L12 10L19 5V7Z"/></svg>
+      <span>Batch</span>
+    </button>
+    <button class="mob-tab" id="btn-mobile-more">
+      <svg viewBox="0 0 24 24"><path d="M4 6H20V8H4V6M4 11H20V13H4V11M4 16H20V18H4V16Z"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  <!-- Modal: Add / Pick Ingredient -->
+  <div class="modal-backdrop" id="modal-ing-picker">
+    <div class="modal-card">
+      <div class="modal-head">
+        <span class="panel-title">Select Material to Add</span>
+        <button class="btn btn-outline btn-sm" id="close-ing-picker">Close</button>
+      </div>
+      <div class="modal-body">
+        <input type="search" id="ing-picker-search" class="input" placeholder="Search sandalwood, ruh gulab, aroma chemicals..." style="margin-bottom:12px;">
+        <div id="ing-picker-results" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Mobile "More Modules" Sheet -->
+  <div class="modal-backdrop" id="modal-more-nav">
+    <div class="modal-card">
+      <div class="modal-head">
+        <span class="panel-title">All Studio Modules</span>
+        <button class="btn btn-outline btn-sm" id="close-more-nav">Close</button>
+      </div>
+      <div class="modal-body" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button class="btn btn-outline" data-nav-sheet="analyzer">Accord Analyzer</button>
+        <button class="btn btn-outline" data-nav-sheet="attar">Traditional Attar Log</button>
+        <button class="btn btn-outline" data-nav-sheet="dilution">Dilution Calculator</button>
+        <button class="btn btn-outline" data-nav-sheet="comparison">Compare Formulas</button>
+        <button class="btn btn-outline" data-nav-sheet="costing">Cost & Inventory</button>
+        <button class="btn btn-outline" data-nav-sheet="library">Formula Library</button>
+        <button class="btn btn-outline" data-nav-sheet="safety">IFRA Safety Review</button>
+        <button class="btn btn-outline" data-nav-sheet="tests">QA Math Tests</button>
+        <button class="btn btn-outline" data-nav-sheet="settings" style="grid-column:1 / -1;">Backup, Restore & Settings</button>
+      </div>
+    </div>
+  </div>
+  <!-- Part 2 of 2 (Master Perfumer Edition): Nested Sub-Accords, Pre-Dilutions, Cumulative Bench Scale & Full CRUD -->
+  <script type="module">
+    const FAMILIES = [
+      "woody", "floral", "citrus", "fresh", "sweet", "spicy",
+      "earthy", "resinous", "musky", "green", "smoky", "powdery", "animalic"
+    ];
+
+    const CATEGORIES = [
+      "Attar bases", "Essential oils", "Absolutes", "Resinoids",
+      "Natural isolates", "Synthetic aroma chemicals", "Premade accords",
+      "Fixative materials", "Musk materials", "Carrier oils", "Solvents and diluents"
+    ];
+
+    const DILUTION_PRESETS = [100, 50, 25, 20, 10, 5, 1, 0.1];
+    const SOLVENT_PRESETS = ["Neat", "Sandalwood", "DPG", "Ethanol", "TEC", "Jojoba"];
+
+    const SAMPLE_INGREDIENTS = [
+      {
+        id: "ing_sandalwood_mysore",
+        name: "Sandalwood Oil (East Indian)",
+        botanicalName: "Santalum album",
+        casNumber: "8006-87-9",
+        category: "Attar bases",
+        origin: "Mysore, India",
+        density: 0.975,
+        flashPoint: 136,
+        pricePerKg: 380000,
+        stockGrams: 850,
+        ifraLimitCat4: 100,
+        verificationStatus: "Verified (IFRA 51st)",
+        notes: "Traditional deg-bhapka receiver base. Creamy, sacred woody fixative (>90% santalols).",
+        ratings: { woody: 96, floral: 10, citrus: 0, fresh: 5, sweet: 45, spicy: 12, earthy: 25, resinous: 42, musky: 30, green: 0, smoky: 5, powdery: 40, animalic: 5 },
+        pyramid: { top: 5, heart: 20, base: 75 },
+        intensity: 65
+      },
+      {
+        id: "ing_ruh_gulab",
+        name: "Ruh Gulab (Damask Rose)",
+        botanicalName: "Rosa damascena",
+        casNumber: "8007-01-0",
+        category: "Essential oils",
+        origin: "Kannauj / Hasayan, India",
+        density: 0.865,
+        flashPoint: 54,
+        pricePerKg: 950000,
+        stockGrams: 120,
+        ifraLimitCat4: 2.5,
+        verificationStatus: "Verified (Methyleugenol limit)",
+        notes: "Copper deg hydro-distilled rose oil. Rich honeyed, spicy-floral heart.",
+        ratings: { woody: 0, floral: 98, citrus: 12, fresh: 45, sweet: 65, spicy: 35, earthy: 10, resinous: 5, musky: 5, green: 22, smoky: 0, powdery: 25, animalic: 10 },
+        pyramid: { top: 30, heart: 55, base: 15 },
+        intensity: 92
+      },
+      {
+        id: "ing_ruh_khus",
+        name: "Ruh Khus (Wild Green Vetiver)",
+        botanicalName: "Chrysopogon zizanioides",
+        casNumber: "8016-96-4",
+        category: "Essential oils",
+        origin: "Kannauj / Bharatpur, India",
+        density: 0.995,
+        flashPoint: 115,
+        pricePerKg: 85000,
+        stockGrams: 450,
+        ifraLimitCat4: 100,
+        verificationStatus: "Verified (IFRA 51st)",
+        notes: "Wild North Indian root distillate. Cooling emerald green, damp rooty-earthy base.",
+        ratings: { woody: 82, floral: 0, citrus: 5, fresh: 32, sweet: 15, spicy: 20, earthy: 96, resinous: 35, musky: 15, green: 55, smoky: 42, powdery: 10, animalic: 10 },
+        pyramid: { top: 10, heart: 25, base: 65 },
+        intensity: 85
+      },
+      {
+        id: "ing_mitti_attar",
+        name: "Mitti Attar (Baked Earth)",
+        botanicalName: "Geophytica terrae in Santalum album",
+        casNumber: "N/A (Co-distillate)",
+        category: "Attar bases",
+        origin: "Kannauj, India",
+        density: 0.968,
+        flashPoint: 128,
+        pricePerKg: 240000,
+        stockGrams: 300,
+        ifraLimitCat4: 100,
+        verificationStatus: "User-Entered (Traditional)",
+        notes: "Kiln-fired Gangetic clay discs hydro-distilled into sandalwood oil. Monsoon petrichor.",
+        ratings: { woody: 75, floral: 5, citrus: 0, fresh: 20, sweet: 20, spicy: 5, earthy: 100, resinous: 30, musky: 25, green: 10, smoky: 28, powdery: 35, animalic: 0 },
+        pyramid: { top: 15, heart: 35, base: 50 },
+        intensity: 75
+      },
+      {
+        id: "ing_shamama_base",
+        name: "Shamama Herbal Complex",
+        botanicalName: "Traditional 40-Herb Co-Distillation",
+        casNumber: "N/A (Accord)",
+        category: "Premade accords",
+        origin: "Kannauj, India",
+        density: 0.985,
+        flashPoint: 110,
+        pricePerKg: 195000,
+        stockGrams: 280,
+        ifraLimitCat4: 18.0,
+        verificationStatus: "User-Entered (Spice/Oakmoss limit)",
+        notes: "Warm winter mukhallat complex with saffron, cypriol, jatamansi, and spices.",
+        ratings: { woody: 70, floral: 20, citrus: 5, fresh: 10, sweet: 45, spicy: 92, earthy: 65, resinous: 90, musky: 60, green: 15, smoky: 65, powdery: 30, animalic: 35 },
+        pyramid: { top: 15, heart: 40, base: 45 },
+        intensity: 95
+      },
+      {
+        id: "ing_bergamot_fcf",
+        name: "Bergamot Oil FCF",
+        botanicalName: "Citrus bergamia",
+        casNumber: "68648-33-9",
+        category: "Essential oils",
+        origin: "Calabria, Italy",
+        density: 0.875,
+        flashPoint: 58,
+        pricePerKg: 28000,
+        stockGrams: 1200,
+        ifraLimitCat4: 20.0,
+        verificationStatus: "Verified (IFRA 51st FCF)",
+        notes: "Bergapten-free cold-pressed citrus oil. Crisp, uplifting top note.",
+        ratings: { woody: 5, floral: 20, citrus: 98, fresh: 92, sweet: 25, spicy: 10, earthy: 0, resinous: 0, musky: 0, green: 30, smoky: 0, powdery: 0, animalic: 0 },
+        pyramid: { top: 85, heart: 15, base: 0 },
+        intensity: 80
+      },
+      {
+        id: "ing_iso_e_super",
+        name: "Iso E Super",
+        botanicalName: "Tetramethyl acetyloctahydronaphthalenes",
+        casNumber: "54464-57-2",
+        category: "Synthetic aroma chemicals",
+        origin: "IFF",
+        density: 0.960,
+        flashPoint: 134,
+        pricePerKg: 3600,
+        stockGrams: 3000,
+        ifraLimitCat4: 21.4,
+        verificationStatus: "Verified (IFRA 51st)",
+        notes: "Velvety cedar-amber wood molecule enhancing diffusion and skin-scent aura.",
+        ratings: { woody: 88, floral: 0, citrus: 0, fresh: 15, sweet: 15, spicy: 5, earthy: 10, resinous: 45, musky: 40, green: 0, smoky: 10, powdery: 15, animalic: 0 },
+        pyramid: { top: 10, heart: 35, base: 55 },
+        intensity: 60
+      },
+      {
+        id: "ing_ambroxan",
+        name: "Ambroxan",
+        botanicalName: "Dodecahydro-tetramethylnaphthofuran",
+        casNumber: "6790-58-5",
+        category: "Fixative materials",
+        origin: "Kao / Symrise",
+        density: 0.940,
+        flashPoint: 161,
+        pricePerKg: 28000,
+        stockGrams: 400,
+        ifraLimitCat4: 100,
+        verificationStatus: "Verified (IFRA 51st)",
+        notes: "Crystalline ambergris fixative with dry woody-mineral radiance.",
+        ratings: { woody: 62, floral: 0, citrus: 0, fresh: 20, sweet: 20, spicy: 0, earthy: 15, resinous: 52, musky: 82, green: 0, smoky: 0, powdery: 20, animalic: 32 },
+        pyramid: { top: 5, heart: 20, base: 75 },
+        intensity: 85
+      }
+    ];
+
+    const SAMPLE_FORMULAS = [
+      {
+        id: "form_amber_wood_accord",
+        name: "Kannauj Amber-Wood Sub-Accord",
+        description: "Reusable modern-traditional woody amber fixative base for nesting into floral attars.",
+        type: "Sub-Accord / Premix",
+        isAccord: true,
+        version: "1.0",
+        targetBatchSize: 100,
+        batchUnit: "g",
+        mode: "auto",
+        strategy: "proportional",
+        updatedAt: "2026-03-10",
+        ingredients: [
+          { type: "ingredient", ingredientId: "ing_sandalwood_mysore", nameSnapshot: "Sandalwood Oil (East Indian)", percentage: 60.0, dilution: 100, solvent: "Neat", locked: false, note: "Core sandalwood body" },
+          { type: "ingredient", ingredientId: "ing_iso_e_super", nameSnapshot: "Iso E Super", percentage: 25.0, dilution: 100, solvent: "Neat", locked: false, note: "Velvety lift" },
+          { type: "ingredient", ingredientId: "ing_ambroxan", nameSnapshot: "Ambroxan", percentage: 15.0, dilution: 10, solvent: "DPG", locked: false, note: "10% stock solution" }
+        ]
+      },
+      {
+        id: "form_gulab_sandal",
+        name: "Gulab-e-Khas Kannauj Attar",
+        description: "Traditional Damask Rose distillate infused in Mysore Sandalwood with nested Kannauj Amber-Wood Sub-Accord.",
+        type: "Traditional Attar",
+        isAccord: false,
+        version: "1.3",
+        targetBatchSize: 100,
+        batchUnit: "g",
+        mode: "auto",
+        strategy: "proportional",
+        updatedAt: "2026-03-15",
+        ingredients: [
+          { type: "ingredient", ingredientId: "ing_sandalwood_mysore", nameSnapshot: "Sandalwood Oil (East Indian)", percentage: 78.0, dilution: 100, solvent: "Neat", locked: false, note: "Receiver base" },
+          { type: "ingredient", ingredientId: "ing_ruh_gulab", nameSnapshot: "Ruh Gulab (Damask Rose)", percentage: 2.2, dilution: 100, solvent: "Neat", locked: false, note: "First flower charge" },
+          { type: "ingredient", ingredientId: "ing_shamama_base", nameSnapshot: "Shamama Herbal Complex", percentage: 7.8, dilution: 100, solvent: "Neat", locked: false, note: "Spice warmth" },
+          { type: "accord", subFormulaId: "form_amber_wood_accord", nameSnapshot: "Kannauj Amber-Wood Sub-Accord", percentage: 12.0, dilution: 100, solvent: "Neat", locked: false, note: "Nested fixative accord" }
+        ]
+      },
+      {
+        id: "form_monsoon_khus",
+        name: "Barkha Mitti & Khus Reserve",
+        description: "First-rain baked earth petrichor paired with wild North Indian green vetiver.",
+        type: "Traditional Attar",
+        isAccord: true,
+        version: "1.0",
+        targetBatchSize: 50,
+        batchUnit: "g",
+        mode: "auto",
+        strategy: "proportional",
+        updatedAt: "2026-03-18",
+        ingredients: [
+          { type: "ingredient", ingredientId: "ing_mitti_attar", nameSnapshot: "Mitti Attar (Baked Earth)", percentage: 48.0, dilution: 100, solvent: "Neat", locked: false, note: "Baked clay base" },
+          { type: "ingredient", ingredientId: "ing_ruh_khus", nameSnapshot: "Ruh Khus (Wild Green Vetiver)", percentage: 32.0, dilution: 100, solvent: "Neat", locked: false, note: "Wild root heart" },
+          { type: "ingredient", ingredientId: "ing_sandalwood_mysore", nameSnapshot: "Sandalwood Oil (East Indian)", percentage: 20.0, dilution: 100, solvent: "Neat", locked: false, note: "Rounding fixative" }
+        ]
+      }
+    ];
+
+    const SAMPLE_ATTAR_LOGS = [
+      {
+        id: "deg_101",
+        name: "Chaiti Gulab Lot #24",
+        botanical: "Rosa damascena (Hasayan Dawn Harvest - 400 kg flowers)",
+        method: "Copper Deg-Bhapka Hydro-Distillation (Bamboo Chonga, Cow-dung & Clay Seal)",
+        receiverBase: "Mysore Sandalwood Oil (25 kg receiver fill)",
+        maturationDays: 90,
+        aromaNotes: "Deep honeyed rose top with zero burnt still-notes; camel-leather kuppi moisture decanted."
+      }
+    ];
+
+    // --- 1. MATHEMATICAL & HIERARCHICAL ACCORD ENGINE ---
+    class FormulaEngine {
+      static sumPercentages(ingredients) {
+        return ingredients.reduce((acc, item) => acc + (Number(item.percentage) || 0), 0);
+      }
+
+      static calcMass(percentage, batchSize) {
+        return (Number(percentage) / 100) * Number(batchSize);
+      }
+
+      static massToVolume(massGrams, density) {
+        const d = Number(density);
+        if (!d || d <= 0) throw new Error("Density must be a positive value in g/mL.");
+        return Number(massGrams) / d;
+      }
+
+      static calculateDilution(c1, c2, finalMass) {
+        const initC = Number(c1), targC = Number(c2), mass = Number(finalMass);
+        if (initC <= 0 || targC <= 0 || mass <= 0) throw new Error("All parameters must be greater than zero.");
+        if (targC > initC) throw new Error("Target concentration cannot exceed initial purity.");
+        const concMass = mass * (targC / initC);
+        return {
+          concentrateMass: concMass,
+          diluentMass: mass - concMass,
+          finalMass: mass
+        };
+      }
+
+      /**
+       * Calculates pure active aromatic concentration (%) accounting for in-row pre-dilutions.
+       */
+      static calcActiveAromaticPercent(ingredients) {
+        return ingredients.reduce((sum, row) => {
+          const pct = Number(row.percentage) || 0;
+          const dil = row.dilution !== undefined ? Number(row.dilution) : 100;
+          return sum + (pct * (dil / 100));
+        }, 0);
+      }
+
+      /**
+       * Computes cumulative gravimetric scale target readings for sequential bench pouring.
+       */
+      static calcCumulativeWeights(ingredients, batchSize) {
+        let running = 0;
+        return ingredients.map(row => {
+          const mass = this.calcMass(row.percentage, batchSize);
+          running += mass;
+          return { mass, cumulative: running };
+        });
+      }
+
+      /**
+       * Detects circular references before nesting `candidateId` inside `parentId`.
+       */
+      static hasCircularReference(parentId, candidateId, formulaMap, visited = new Set()) {
+        if (!parentId || !candidateId) return false;
+        if (parentId === candidateId) return true;
+        if (visited.has(candidateId)) return true;
+        visited.add(candidateId);
+
+        const candidateFormula = formulaMap[candidateId];
+        if (!candidateFormula || !Array.isArray(candidateFormula.ingredients)) return false;
+
+        for (const item of candidateFormula.ingredients) {
+          if (item.type === "accord" && item.subFormulaId) {
+            if (item.subFormulaId === parentId) return true;
+            if (this.hasCircularReference(parentId, item.subFormulaId, formulaMap, new Set(visited))) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      /**
+       * Recursively expands all nested sub-accords into flat raw material percentages,
+       * merging duplicate raw materials and preserving effective active dilutions.
+       */
+      static flattenFormula(ingredients, formulaMap, depth = 0) {
+        if (depth > 12) throw new Error("Maximum sub-accord nesting depth (12) exceeded.");
+        const mergedMap = new Map();
+
+        const processList = (items, scaleFactor) => {
+          const listTotal = this.sumPercentages(items) || 100;
+          for (const row of items) {
+            const rowPct = Number(row.percentage) || 0;
+            const effectivePct = (rowPct / listTotal) * 100 * scaleFactor;
+            const rowDil = row.dilution !== undefined ? Number(row.dilution) : 100;
+
+            if (row.type === "accord" && row.subFormulaId && formulaMap[row.subFormulaId]) {
+              const childFormula = formulaMap[row.subFormulaId];
+              processList(childFormula.ingredients, (effectivePct / 100) * (rowDil / 100));
+            } else {
+              const key = row.ingredientId || row.nameSnapshot;
+              if (!key) continue;
+              const prev = mergedMap.get(key);
+              if (prev) {
+                const prevActive = prev.percentage * (prev.dilution / 100);
+                const addActive = effectivePct * (rowDil / 100);
+                const newTotalPct = prev.percentage + effectivePct;
+                const blendedDil = newTotalPct > 0 ? ((prevActive + addActive) / newTotalPct) * 100 : 100;
+                prev.percentage = newTotalPct;
+                prev.dilution = Number(blendedDil.toFixed(2));
+                if (row.subSource && !prev.note.includes(row.subSource)) {
+                  prev.note = prev.note ? `${prev.note} + ${row.subSource}` : `From ${row.subSource}`;
+                }
+              } else {
+                mergedMap.set(key, {
+                  type: "ingredient",
+                  ingredientId: row.ingredientId,
+                  nameSnapshot: row.nameSnapshot,
+                  percentage: effectivePct,
+                  dilution: rowDil,
+                  solvent: row.solvent || "Neat",
+                  locked: false,
+                  note: row.note || ""
+                });
+              }
+            }
+          }
+        };
+
+        const rootSum = this.sumPercentages(ingredients) || 100;
+        processList(ingredients, rootSum / 100);
+        return Array.from(mergedMap.values());
+      }
+
+      /**
+       * Expands a single sub-accord row at `rowIndex` in-place into its constituent rows.
+       */
+      static expandSingleAccordRow(ingredients, rowIndex, formulaMap) {
+        const targetRow = ingredients[rowIndex];
+        if (!targetRow || targetRow.type !== "accord" || !formulaMap[targetRow.subFormulaId]) {
+          return ingredients;
+        }
+        const subFormula = formulaMap[targetRow.subFormulaId];
+        const subSum = this.sumPercentages(subFormula.ingredients) || 100;
+        const parentAllocation = Number(targetRow.percentage) || 0;
+        const parentDilutionFactor = (targetRow.dilution !== undefined ? Number(targetRow.dilution) : 100) / 100;
+
+        const expandedRows = subFormula.ingredients.map(child => {
+          const childNorm = (Number(child.percentage) || 0) / subSum;
+          const childDil = child.dilution !== undefined ? Number(child.dilution) : 100;
+          return {
+            type: child.type || "ingredient",
+            ingredientId: child.ingredientId,
+            subFormulaId: child.subFormulaId,
+            nameSnapshot: child.nameSnapshot,
+            percentage: parentAllocation * childNorm,
+            dilution: Number((childDil * parentDilutionFactor).toFixed(2)),
+            solvent: child.solvent || targetRow.solvent || "Neat",
+            locked: false,
+            note: `Expanded from ${subFormula.name}`
+          };
+        });
+
+        const next = [...ingredients];
+        next.splice(rowIndex, 1, ...expandedRows);
+
+        // Merge any duplicate raw materials with identical dilution/solvent
+        const consolidated = [];
+        for (const item of next) {
+          if (item.type !== "accord") {
+            const existing = consolidated.find(
+              x => x.type !== "accord" && x.ingredientId === item.ingredientId && Number(x.dilution || 100) === Number(item.dilution || 100)
+            );
+            if (existing) {
+              existing.percentage += item.percentage;
+              continue;
+            }
+          }
+          consolidated.push(item);
+        }
+        return consolidated;
+      }
+
+      static autoBalance(ingredients, changedIdx, newPct, strategy = "proportional") {
+        const clampedTarget = Math.max(0, Math.min(100, Number(newPct) || 0));
+        const lockedSum = ingredients.reduce((acc, it, idx) => (it.locked && idx !== changedIdx ? acc + (Number(it.percentage) || 0) : acc), 0);
+        const maxAllowed = Math.max(0, 100 - lockedSum);
+        const effectiveTarget = Math.min(clampedTarget, maxAllowed);
+
+        const unlockedIndices = ingredients
+          .map((it, idx) => (!it.locked && idx !== changedIdx ? idx : -1))
+          .filter(idx => idx !== -1);
+
+        if (unlockedIndices.length === 0) {
+          return {
+            success: false,
+            ingredients,
+            error: "All other materials are locked. Unlock at least one material to auto-balance."
+          };
+        }
+
+        const next = ingredients.map(it => ({ ...it }));
+        const oldPct = Number(next[changedIdx].percentage) || 0;
+        const delta = effectiveTarget - oldPct;
+        next[changedIdx].percentage = effectiveTarget;
+
+        const unlockedTotal = unlockedIndices.reduce((acc, idx) => acc + (Number(next[idx].percentage) || 0), 0);
+
+        if (strategy === "equal" || unlockedTotal <= 0.0001) {
+          const share = delta / unlockedIndices.length;
+          unlockedIndices.forEach(idx => {
+            next[idx].percentage = Math.max(0, next[idx].percentage - share);
+          });
+        } else {
+          unlockedIndices.forEach(idx => {
+            const weight = next[idx].percentage / unlockedTotal;
+            next[idx].percentage = Math.max(0, next[idx].percentage - delta * weight);
+          });
+        }
+
+        const finalSum = this.sumPercentages(next);
+        const drift = 100.0 - finalSum;
+        if (Math.abs(drift) > 0.00001) {
+          const absorbIdx = unlockedIndices.find(idx => next[idx].percentage + drift >= 0) ?? unlockedIndices[0];
+          next[absorbIdx].percentage = Math.max(0, next[absorbIdx].percentage + drift);
+        }
+
+        return { success: true, ingredients: next };
+      }
+
+      static analyzeAccord(formulaIngredients, ingMap, formulaMap = {}, useIntensity = true) {
+        const scores = {};
+        FAMILIES.forEach(f => (scores[f] = 0));
+        const pyramid = { top: 0, heart: 0, base: 0 };
+
+        // Recursively flatten nested sub-accords so radar & pyramid reflect underlying raw materials
+        const flatList = this.flattenFormula(formulaIngredients, formulaMap);
+        const totalPct = this.sumPercentages(flatList) || 100;
+
+        flatList.forEach(row => {
+          const ing = ingMap[row.ingredientId];
+          if (!ing) return;
+          const dilFactor = (row.dilution !== undefined ? Number(row.dilution) : 100) / 100;
+          const normProp = ((Number(row.percentage) || 0) * dilFactor) / totalPct;
+          const intensityFactor = useIntensity ? ((Number(ing.intensity) || 50) / 50) : 1.0;
+
+          FAMILIES.forEach(f => {
+            const rating = ing.ratings && ing.ratings[f] ? Number(ing.ratings[f]) : 0;
+            scores[f] += normProp * rating * intensityFactor;
+          });
+
+          if (ing.pyramid) {
+            pyramid.top += normProp * (Number(ing.pyramid.top) || 0);
+            pyramid.heart += normProp * (Number(ing.pyramid.heart) || 0);
+            pyramid.base += normProp * (Number(ing.pyramid.base) || 0);
+          }
+        });
+
+        const pyrTotal = pyramid.top + pyramid.heart + pyramid.base || 1;
+        return {
+          families: scores,
+          pyramid: {
+            top: (pyramid.top / pyrTotal) * 100,
+            heart: (pyramid.heart / pyrTotal) * 100,
+            base: (pyramid.base / pyrTotal) * 100
+          }
+        };
+      }
+    }
+
+    // --- 2. INDEXEDDB STORAGE ---
+    class LocalDB {
+      constructor() {
+        this.dbName = "AttarLabPro_v2";
+        this.db = null;
+      }
+
+      async open() {
+        return new Promise((resolve, reject) => {
+          const req = indexedDB.open(this.dbName, 1);
+          req.onupgradeneeded = e => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains("ingredients")) db.createObjectStore("ingredients", { keyPath: "id" });
+            if (!db.objectStoreNames.contains("formulas")) db.createObjectStore("formulas", { keyPath: "id" });
+            if (!db.objectStoreNames.contains("attar_logs")) db.createObjectStore("attar_logs", { keyPath: "id" });
+          };
+          req.onsuccess = async e => {
+            this.db = e.target.result;
+            await this.seedIfEmpty();
+            resolve();
+          };
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async seedIfEmpty() {
+        const ings = await this.getAll("ingredients");
+        if (ings.length === 0) {
+          for (const item of SAMPLE_INGREDIENTS) await this.put("ingredients", item);
+          for (const form of SAMPLE_FORMULAS) await this.put("formulas", form);
+          for (const log of SAMPLE_ATTAR_LOGS) await this.put("attar_logs", log);
+        } else {
+          // Ensure sample sub-accord exists for upgrades
+          const forms = await this.getAll("formulas");
+          if (!forms.some(f => f.id === "form_amber_wood_accord")) {
+            await this.put("formulas", SAMPLE_FORMULAS[0]);
+          }
+        }
+      }
+
+      async getAll(store) {
+        return new Promise((resolve, reject) => {
+          const tx = this.db.transaction(store, "readonly");
+          const req = tx.objectStore(store).getAll();
+          req.onsuccess = () => resolve(req.result || []);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async put(store, record) {
+        return new Promise((resolve, reject) => {
+          const tx = this.db.transaction(store, "readwrite");
+          const req = tx.objectStore(store).put(record);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async delete(store, id) {
+        return new Promise((resolve, reject) => {
+          const tx = this.db.transaction(store, "readwrite");
+          const req = tx.objectStore(store).delete(id);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        });
+      }
+    }
+
+    // --- 3. MASTER PERFUMER WORKSPACE CONTROLLER ---
+    class AttarLabStudio {
+      constructor() {
+        this.db = new LocalDB();
+        this.ingredients = [];
+        this.ingMap = {};
+        this.formulas = [];
+        this.formulaMap = {};
+        this.attarLogs = [];
+        this.activeFormula = null;
+        this.activeScreen = "studio";
+        this.currency = localStorage.getItem("attarlab_currency") || "₹";
+        this.undoStack = [];
+        this.redoStack = [];
+        this.batchFlattenMode = false;
+        this.weighedChecks = {};
+      }
+
+      async init() {
+        this.injectProUIHelpers();
+        await this.db.open();
+        await this.reloadDatabase();
+        const defaultF = this.formulas.find(f => f.id === "form_gulab_sandal") || this.formulas[0] || SAMPLE_FORMULAS[1];
+        this.activeFormula = JSON.parse(JSON.stringify(defaultF));
+        this.bindShellEvents();
+        this.navigate("studio");
+      }
+
+      injectProUIHelpers() {
+        const extraStyles = document.createElement("style");
+        extraStyles.textContent = `
+          .input-clear-wrap { position: relative; display: flex; align-items: center; width: 100%; }
+          .input-clear-wrap .input { padding-right: 30px; }
+          .clear-field-btn {
+            position: absolute; right: 6px; width: 22px; height: 22px;
+            border-radius: 50%; border: none; background: var(--bg-elevated);
+            color: var(--text-secondary); font-size: 12px; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+          }
+          .clear-field-btn:active { background: var(--status-err-bg); color: #ff8582; }
+          .toast-stack {
+            position: fixed; bottom: 80px; right: 16px; left: 16px;
+            pointer-events: none; z-index: 250; display: flex;
+            flex-direction: column; align-items: center; gap: 8px;
+          }
+          .toast-msg {
+            background: #1c212c; border: 1px solid var(--accent-gold);
+            color: var(--text-primary); padding: 10px 16px; border-radius: 999px;
+            font-size: 12.5px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            pointer-events: auto; animation: toastIn 0.2s ease;
+          }
+          @keyframes toastIn { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+          .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+          .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+          @media (max-width: 600px) {
+            .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+          }
+          .Descriptor-slider-row {
+            display: grid; grid-template-columns: 82px 1fr 34px; align-items: center; gap: 8px; margin-bottom: 6px;
+          }
+          .sub-accord-card {
+            border-left: 3px solid var(--accent-gold-bright) !important;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08), var(--bg-surface)) !important;
+          }
+          .accord-pill {
+            font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+            background: var(--accent-gold-soft); color: var(--accent-gold-bright);
+            border: 1px solid var(--border-gold); letter-spacing: 0.4px;
+          }
+          .mini-select {
+            background: var(--bg-elevated); border: 1px solid var(--border-subtle);
+            color: var(--text-secondary); border-radius: 4px; padding: 2px 5px;
+            font-size: 11px; font-family: var(--font-mono); cursor: pointer;
+          }
+          .picker-tabs {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px;
+          }
+          .weighed-row { opacity: 0.45; text-decoration: line-through; }
+        `;
+        document.head.appendChild(extraStyles);
+
+        const helperHTML = document.createElement("div");
+        helperHTML.innerHTML = `
+          <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+          <!-- Pro Material Editor Modal -->
+          <div class="modal-backdrop" id="modal-ing-editor">
+            <div class="modal-card" style="max-width:640px;">
+              <div class="modal-head">
+                <span class="panel-title" id="ing-editor-title">Material Specification</span>
+                <button class="btn btn-outline btn-sm" id="close-ing-editor">✕ Close</button>
+              </div>
+              <div class="modal-body" id="ing-editor-body"></div>
+            </div>
+          </div>
+
+          <!-- Sub-Accord Inspector Modal -->
+          <div class="modal-backdrop" id="modal-accord-inspect">
+            <div class="modal-card" style="max-width:520px;">
+              <div class="modal-head">
+                <span class="panel-title" id="accord-inspect-title">Sub-Accord Breakdown</span>
+                <button class="btn btn-outline btn-sm" id="close-accord-inspect">✕ Close</button>
+              </div>
+              <div class="modal-body" id="accord-inspect-body"></div>
+            </div>
+          </div>
+
+          <!-- Confirmation Modal -->
+          <div class="modal-backdrop" id="modal-confirm">
+            <div class="modal-card" style="max-width:420px;">
+              <div class="modal-head">
+                <span class="panel-title" id="confirm-title">Confirm Action</span>
+              </div>
+              <div class="modal-body">
+                <p id="confirm-msg" style="color:var(--text-secondary);margin-bottom:16px;font-size:13.5px;"></p>
+                <div style="display:flex;justify-content:flex-end;gap:8px;">
+                  <button class="btn btn-outline" id="confirm-cancel">Cancel</button>
+                  <button class="btn btn-danger" id="confirm-ok">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(helperHTML);
+
+        document.getElementById("close-ing-editor").onclick = () => {
+          document.getElementById("modal-ing-editor").classList.remove("open");
+        };
+        document.getElementById("close-accord-inspect").onclick = () => {
+          document.getElementById("modal-accord-inspect").classList.remove("open");
+        };
+      }
+
+      toast(message) {
+        const stack = document.getElementById("toast-stack");
+        if (!stack) return;
+        const el = document.createElement("div");
+        el.className = "toast-msg";
+        el.textContent = message;
+        stack.appendChild(el);
+        setTimeout(() => el.remove(), 2600);
+      }
+
+      confirmDialog(title, message, okLabel = "Confirm") {
+        return new Promise(resolve => {
+          const modal = document.getElementById("modal-confirm");
+          document.getElementById("confirm-title").textContent = title;
+          document.getElementById("confirm-msg").textContent = message;
+          const okBtn = document.getElementById("confirm-ok");
+          const cancelBtn = document.getElementById("confirm-cancel");
+          okBtn.textContent = okLabel;
+          modal.classList.add("open");
+
+          const cleanup = result => {
+            modal.classList.remove("open");
+            okBtn.onclick = null;
+            cancelBtn.onclick = null;
+            resolve(result);
+          };
+          okBtn.onclick = () => cleanup(true);
+          cancelBtn.onclick = () => cleanup(false);
+        });
+      }
+
+      pushUndoState() {
+        if (!this.activeFormula) return;
+        this.undoStack.push(JSON.stringify(this.activeFormula));
+        if (this.undoStack.length > 30) this.undoStack.shift();
+        this.redoStack = [];
+      }
+
+      undo() {
+        if (this.undoStack.length === 0) {
+          this.toast("Nothing to undo");
+          return;
+        }
+        this.redoStack.push(JSON.stringify(this.activeFormula));
+        this.activeFormula = JSON.parse(this.undoStack.pop());
+        this.setDirty(true);
+        if (this.activeScreen === "studio") this.renderStudio(document.getElementById("app-viewport"));
+        this.toast("Undid last change");
+      }
+
+      redo() {
+        if (this.redoStack.length === 0) {
+          this.toast("Nothing to redo");
+          return;
+        }
+        this.undoStack.push(JSON.stringify(this.activeFormula));
+        this.activeFormula = JSON.parse(this.redoStack.pop());
+        this.setDirty(true);
+        if (this.activeScreen === "studio") this.renderStudio(document.getElementById("app-viewport"));
+        this.toast("Redid change");
+      }
+
+      async reloadDatabase() {
+        this.ingredients = await this.db.getAll("ingredients");
+        this.ingMap = {};
+        this.ingredients.forEach(i => (this.ingMap[i.id] = i));
+        this.formulas = await this.db.getAll("formulas");
+        this.formulaMap = {};
+        this.formulas.forEach(f => (this.formulaMap[f.id] = f));
+        this.attarLogs = await this.db.getAll("attar_logs");
+      }
+
+      setDirty(isDirty = true) {
+        const badge = document.getElementById("sync-badge");
+        if (!badge) return;
+        if (isDirty) {
+          badge.className = "status-pill pill-warn";
+          badge.textContent = "Unsaved";
+        } else {
+          badge.className = "status-pill pill-ok";
+          badge.textContent = "Saved";
+        }
+      }
+
+      bindShellEvents() {
+        document.querySelectorAll("[data-nav]").forEach(btn => {
+          btn.addEventListener("click", () => this.navigate(btn.getAttribute("data-nav")));
+        });
+
+        const moreModal = document.getElementById("modal-more-nav");
+        document.getElementById("btn-mobile-more").addEventListener("click", () => moreModal.classList.add("open"));
+        document.getElementById("close-more-nav").addEventListener("click", () => moreModal.classList.remove("open"));
+        document.querySelectorAll("[data-nav-sheet]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            moreModal.classList.remove("open");
+            this.navigate(btn.getAttribute("data-nav-sheet"));
+          });
+        });
+
+        document.getElementById("close-ing-picker").addEventListener("click", () => {
+          document.getElementById("modal-ing-picker").classList.remove("open");
+        });
+
+        document.getElementById("btn-save-now").addEventListener("click", () => this.saveCurrentFormula());
+        document.getElementById("btn-export-csv").addEventListener("click", () => this.exportCurrentCSV());
+      }
+
+      navigate(screen) {
+        this.activeScreen = screen;
+        document.querySelectorAll("[data-nav]").forEach(el => {
+          el.classList.toggle("active", el.getAttribute("data-nav") === screen);
+        });
+
+        const titles = {
+          dashboard: "Studio Overview",
+          studio: "Formulation Studio",
+          ingredients: "Ingredient Library",
+          analyzer: "Accord & Recommendations",
+          attar: "Traditional Attar Deg Log",
+          batch: "Batch & Gravimetric Scale",
+          dilution: "Dilution Calculator",
+          comparison: "Formula Comparison",
+          costing: "Cost & Inventory",
+          library: "Formula & Accord Library",
+          safety: "IFRA 51st Safety Review",
+          tests: "QA Math Verification",
+          settings: "Backup & Studio Settings"
+        };
+        document.getElementById("topbar-title").textContent = titles[screen] || "AttarLab Pro";
+
+        const vp = document.getElementById("app-viewport");
+        vp.scrollTop = 0;
+
+        switch (screen) {
+          case "dashboard": return this.renderDashboard(vp);
+          case "studio": return this.renderStudio(vp);
+          case "ingredients": return this.renderIngredients(vp);
+          case "analyzer": return this.renderAnalyzer(vp);
+          case "attar": return this.renderAttarWorkspace(vp);
+          case "batch": return this.renderBatch(vp);
+          case "dilution": return this.renderDilution(vp);
+          case "comparison": return this.renderComparison(vp);
+          case "costing": return this.renderCosting(vp);
+          case "library": return this.renderLibrary(vp);
+          case "safety": return this.renderSafety(vp);
+          case "tests": return this.renderTests(vp);
+          case "settings": return this.renderSettings(vp);
+        }
+      }
+
+      async saveCurrentFormula(asNewVersion = false) {
+        if (!this.activeFormula.name || !this.activeFormula.name.trim()) {
+          this.activeFormula.name = "Untitled Attar Formula";
+        }
+        if (asNewVersion) {
+          const copy = JSON.parse(JSON.stringify(this.activeFormula));
+          copy.id = "form_" + Date.now();
+          const curVer = parseFloat(copy.version || "1.0") || 1.0;
+          copy.version = (curVer + 0.1).toFixed(1);
+          this.activeFormula = copy;
+        }
+        this.activeFormula.updatedAt = new Date().toISOString().slice(0, 10);
+        await this.db.put("formulas", this.activeFormula);
+        await this.reloadDatabase();
+        this.setDirty(false);
+        this.toast(asNewVersion ? `Branched to v${this.activeFormula.version}` : "Saved to Local Database");
+        if (this.activeScreen === "studio") this.renderStudio(document.getElementById("app-viewport"));
+      }
+
+      exportCurrentCSV() {
+        const f = this.activeFormula;
+        if (!f.ingredients.length) {
+          this.toast("Add materials before exporting CSV");
+          return;
+        }
+        let csv = "Type,Material/Sub-Accord,Dilution (%),Solvent,Formula %,PPT (per 1000),Batch Mass (g),Notes\n";
+        f.ingredients.forEach(row => {
+          const isAccord = row.type === "accord";
+          const name = isAccord
+            ? (this.formulaMap[row.subFormulaId]?.name || row.nameSnapshot || "Sub-Accord")
+            : (this.ingMap[row.ingredientId]?.name || row.nameSnapshot || "Material");
+          const mass = FormulaEngine.calcMass(row.percentage, f.targetBatchSize);
+          const ppt = Number(row.percentage) * 10;
+          csv += `"${isAccord ? "SUB-ACCORD" : "RAW"}","${name}",${row.dilution ?? 100},"${row.solvent || "Neat"}",${Number(row.percentage).toFixed(2)},${ppt.toFixed(1)},${mass.toFixed(3)},"${(row.note || "").replace(/"/g, '""')}"\n`;
+        });
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `${(f.name || "Formula").replace(/\s+/g, "_")}_v${f.version || "1.0"}.csv`;
+        a.click();
+        this.toast("CSV exported");
+      }
+
+      // --- SCREEN 1: DASHBOARD ---
+      renderDashboard(vp) {
+        const lowStockCount = this.ingredients.filter(i => (i.stockGrams || 0) < 150).length;
+        const accordCount = this.formulas.filter(f => f.isAccord).length;
+        vp.innerHTML = `
+          <div class="hud-grid">
+            <div class="hud-card">
+              <span class="hud-label">Formulas & Accords</span>
+              <span class="hud-val">${this.formulas.length}</span>
+              <span class="hud-sub">${accordCount} Reusable Sub-Accords</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">Raw Materials</span>
+              <span class="hud-val">${this.ingredients.length}</span>
+              <span class="hud-sub">Attars, Oils & Isolates</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">Deg Distillations</span>
+              <span class="hud-val">${this.attarLogs.length}</span>
+              <span class="hud-sub">Kannauj Receiver Logs</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">Low Stock Alerts</span>
+              <span class="hud-val" style="color:${lowStockCount > 0 ? 'var(--status-warn)' : 'var(--status-ok)'}">${lowStockCount}</span>
+              <span class="hud-sub">Below 150g threshold</span>
+            </div>
+          </div>
+
+          <div class="studio-layout">
+            <div class="panel">
+              <div class="panel-head"><span class="panel-title">Quick Studio Actions</span></div>
+              <div class="panel-body" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <button class="btn btn-gold" id="dash-new-formula">+ New Blank Formula</button>
+                <button class="btn btn-outline" id="dash-new-accord">+ New Sub-Accord Base</button>
+                <button class="btn btn-outline" id="dash-new-ing">+ Create Raw Material</button>
+                <button class="btn btn-outline" id="dash-open-batch">Gravimetric Weigh Sheet</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><span class="panel-title">Saved Formulas & Sub-Accords</span></div>
+              <div class="panel-body" style="display:flex;flex-direction:column;gap:8px;">
+                ${this.formulas.map(f => `
+                  <div class="ing-row-card ${f.isAccord ? "sub-accord-card" : ""}" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" data-load-f="${f.id}">
+                    <div>
+                      <div class="ing-name">
+                        ${f.name}
+                        ${f.isAccord ? `<span class="accord-pill">❖ ACCORD</span>` : `<span class="ing-cat-badge">v${f.version || "1.0"}</span>`}
+                      </div>
+                      <div class="hud-sub">${f.ingredients.length} rows • ${f.targetBatchSize}g batch</div>
+                    </div>
+                    <span class="btn btn-outline btn-sm">Open</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+
+        const createBlank = (isAccord = false) => {
+          this.pushUndoState();
+          this.activeFormula = {
+            id: "form_" + Date.now(),
+            name: isAccord ? "New Reusable Sub-Accord" : "New Attar Formulation",
+            description: isAccord ? "Premix accord for nesting in formulas" : "Experimental formulation",
+            type: isAccord ? "Sub-Accord / Premix" : "Traditional Attar",
+            isAccord,
+            version: "1.0",
+            targetBatchSize: 100,
+            batchUnit: "g",
+            mode: "auto",
+            strategy: "proportional",
+            ingredients: []
+          };
+          this.setDirty(true);
+          this.navigate("studio");
+        };
+
+        vp.querySelector("#dash-new-formula").onclick = () => createBlank(false);
+        vp.querySelector("#dash-new-accord").onclick = () => createBlank(true);
+        vp.querySelector("#dash-new-ing").onclick = () => this.openMaterialEditor(null);
+        vp.querySelector("#dash-open-batch").onclick = () => this.navigate("batch");
+        vp.querySelectorAll("[data-load-f]").forEach(el => {
+          el.onclick = () => {
+            const found = this.formulas.find(x => x.id === el.getAttribute("data-load-f"));
+            if (found) {
+              this.activeFormula = JSON.parse(JSON.stringify(found));
+              this.setDirty(false);
+              this.navigate("studio");
+            }
+          };
+        });
+      }
+
+      // --- SCREEN 2: FORMULATION STUDIO (NESTED SUB-ACCORDS + DILUTIONS + SORTING) ---
+      renderStudio(vp) {
+        const f = this.activeFormula;
+        vp.innerHTML = `
+          <div class="hud-grid">
+            <div class="hud-card">
+              <span class="hud-label">Formula Total</span>
+              <span class="hud-val" id="hud-total-pct">0.00%</span>
+              <span class="hud-sub" id="hud-balance-state">Checking...</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">Pure Aromatic Oil</span>
+              <span class="hud-val" id="hud-aromatic-pct" style="color:var(--accent-gold-bright)">0.00%</span>
+              <span class="hud-sub" id="hud-mat-count">${f.ingredients.length} Rows</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">Est. Batch Cost</span>
+              <span class="hud-val" id="hud-batch-cost">${this.currency}0</span>
+              <span class="hud-sub" id="hud-gram-cost">${this.currency}0 / g</span>
+            </div>
+            <div class="hud-card">
+              <span class="hud-label">IFRA Cat 4 (Flattened)</span>
+              <span class="hud-val" id="hud-ifra-status">OK</span>
+              <span class="hud-sub">Includes Sub-Accords</span>
+            </div>
+          </div>
+
+          <div class="studio-layout">
+            <!-- Left Column: Workbench -->
+            <div class="panel">
+              <div class="panel-head">
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                  <span class="panel-title">Workbench <span class="ing-cat-badge">v${f.version || "1.0"}</span></span>
+                  <button class="btn btn-outline btn-sm" id="btn-undo" title="Undo">↶</button>
+                  <button class="btn btn-outline btn-sm" id="btn-redo" title="Redo">↷</button>
+                  <label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--text-secondary);cursor:pointer;margin-left:4px;">
+                    <input type="checkbox" id="chk-is-accord" ${f.isAccord ? "checked" : ""}> Mark as Reusable Sub-Accord
+                  </label>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <button class="btn btn-outline btn-sm" id="btn-sort-pyramid" title="Sort Top -> Heart -> Base">Sort T→H→B</button>
+                  <button class="btn btn-outline btn-sm" id="btn-sort-pct" title="Sort Highest to Lowest %">Sort %↓</button>
+                  <button class="btn btn-outline btn-sm" id="btn-norm-100">100%</button>
+                  <button class="btn btn-danger btn-sm" id="btn-clear-all">Clear</button>
+                  <button class="btn btn-gold btn-sm" id="btn-open-picker">+ Add Material / Accord</button>
+                </div>
+              </div>
+
+              <div class="formula-toolbar">
+                <div class="field-group">
+                  <label class="field-label">Formula / Accord Name (Tap ✕ to clear)</label>
+                  <div class="input-clear-wrap">
+                    <input type="text" id="studio-form-name" class="input" value="${f.name || ""}" placeholder="Enter formula or accord name...">
+                    <button type="button" class="clear-field-btn" id="clear-form-name">✕</button>
+                  </div>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Target Batch (g)</label>
+                  <div class="input-clear-wrap">
+                    <input type="text" inputmode="decimal" id="studio-batch-size" class="input input-mono" value="${f.targetBatchSize}">
+                    <button type="button" class="clear-field-btn" id="clear-batch-size">✕</button>
+                  </div>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Compounding Mode</label>
+                  <select id="studio-adj-mode" class="select">
+                    <option value="auto" ${f.mode === "auto" ? "selected" : ""}>Mode B: Auto-Balance (100%)</option>
+                    <option value="direct" ${f.mode === "direct" ? "selected" : ""}>Mode A: Direct Percentage (%)</option>
+                    <option value="mass" ${f.mode === "mass" ? "selected" : ""}>Mode C: Direct Scale Weight (g)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="ing-list" id="studio-ing-list"></div>
+            </div>
+
+            <!-- Right Column: Olfactory Radar & Pyramid -->
+            <div>
+              <div class="panel">
+                <div class="panel-head">
+                  <span class="panel-title">Olfactory Accord Radar</span>
+                  <span class="hud-sub">Recursive Sub-Accord Aware</span>
+                </div>
+                <div class="panel-body">
+                  <div class="radar-stage" id="studio-radar-svg"></div>
+                  <div style="margin-top:14px;">
+                    <div class="field-label">Evaporation Role Distribution (Top / Heart / Base)</div>
+                    <div class="pyramid-stack">
+                      <div class="pyr-bar-top" id="bar-pyr-top" style="width:33%"></div>
+                      <div class="pyr-bar-heart" id="bar-pyr-heart" style="width:33%"></div>
+                      <div class="pyr-bar-base" id="bar-pyr-base" style="width:34%"></div>
+                    </div>
+                    <div class="pyramid-legend-grid">
+                      <div class="pyr-chip"><strong style="color:#56cfe1">Top</strong> <div id="txt-pyr-top">0%</div></div>
+                      <div class="pyr-chip"><strong style="color:#f2cc8f">Heart</strong> <div id="txt-pyr-heart">0%</div></div>
+                      <div class="pyr-chip"><strong style="color:#d4af37">Base</strong> <div id="txt-pyr-base">0%</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        vp.querySelector("#btn-undo").onclick = () => this.undo();
+        vp.querySelector("#btn-redo").onclick = () => this.redo();
+        vp.querySelector("#chk-is-accord").onchange = e => {
+          this.activeFormula.isAccord = e.target.checked;
+          this.activeFormula.type = e.target.checked ? "Sub-Accord / Premix" : "Traditional Attar";
+          this.setDirty(true);
+          this.toast(e.target.checked ? "Marked as reusable Sub-Accord" : "Marked as Standard Formula");
+        };
+
+        // Sort by Note Pyramid (Top -> Heart -> Base)
+        vp.querySelector("#btn-sort-pyramid").onclick = () => {
+          this.pushUndoState();
+          const roleScore = row => {
+            if (row.type === "accord") return 2;
+            const ing = this.ingMap[row.ingredientId];
+            if (!ing || !ing.pyramid) return 2;
+            const { top = 0, heart = 0, base = 0 } = ing.pyramid;
+            if (top >= heart && top >= base) return 1;
+            if (heart >= top && heart >= base) return 2;
+            return 3;
+          };
+          this.activeFormula.ingredients.sort((a, b) => roleScore(a) - roleScore(b));
+          this.setDirty(true);
+          this.buildIngredientCards();
+          this.syncStudioDOMValues();
+          this.toast("Sorted Top → Heart → Base");
+        };
+
+        // Sort by Percentage (High -> Low)
+        vp.querySelector("#btn-sort-pct").onclick = () => {
+          this.pushUndoState();
+          this.activeFormula.ingredients.sort((a, b) => (Number(b.percentage) || 0) - (Number(a.percentage) || 0));
+          this.setDirty(true);
+          this.buildIngredientCards();
+          this.syncStudioDOMValues();
+          this.toast("Sorted by highest concentration");
+        };
+
+        vp.querySelector("#btn-clear-all").onclick = async () => {
+          if (this.activeFormula.ingredients.length === 0) return;
+          const ok = await this.confirmDialog("Clear Workbench?", "Remove all rows from the current workbench? (You can Undo with ↶).", "Clear All");
+          if (ok) {
+            this.pushUndoState();
+            this.activeFormula.ingredients = [];
+            this.setDirty(true);
+            this.buildIngredientCards();
+            this.syncStudioDOMValues();
+          }
+        };
+
+        const nameInput = vp.querySelector("#studio-form-name");
+        nameInput.addEventListener("input", e => {
+          this.activeFormula.name = e.target.value;
+          this.setDirty(true);
+        });
+        vp.querySelector("#clear-form-name").onclick = () => {
+          nameInput.value = "";
+          this.activeFormula.name = "";
+          this.setDirty(true);
+          nameInput.focus();
+        };
+
+        const batchInput = vp.querySelector("#studio-batch-size");
+        batchInput.addEventListener("input", e => {
+          const raw = e.target.value.trim();
+          if (raw === "") return;
+          const parsed = parseFloat(raw);
+          if (!isNaN(parsed) && parsed > 0) {
+            this.activeFormula.targetBatchSize = parsed;
+            this.setDirty(true);
+            this.syncStudioDOMValues();
+          }
+        });
+        batchInput.addEventListener("blur", e => {
+          const parsed = parseFloat(e.target.value);
+          if (isNaN(parsed) || parsed <= 0) this.activeFormula.targetBatchSize = 100;
+          e.target.value = this.activeFormula.targetBatchSize;
+          this.syncStudioDOMValues();
+        });
+        vp.querySelector("#clear-batch-size").onclick = () => {
+          batchInput.value = "";
+          batchInput.focus();
+        };
+
+        vp.querySelector("#studio-adj-mode").addEventListener("change", e => {
+          this.activeFormula.mode = e.target.value;
+          this.setDirty(true);
+          this.buildIngredientCards();
+          this.syncStudioDOMValues();
+        });
+
+        vp.querySelector("#btn-norm-100").addEventListener("click", () => {
+          const sum = FormulaEngine.sumPercentages(this.activeFormula.ingredients);
+          if (sum <= 0) return;
+          this.pushUndoState();
+          this.activeFormula.ingredients.forEach(it => {
+            it.percentage = (it.percentage / sum) * 100;
+          });
+          this.setDirty(true);
+          this.syncStudioDOMValues();
+          this.toast("Normalized to 100.00%");
+        });
+
+        vp.querySelector("#btn-open-picker").addEventListener("click", () => this.openIngredientModal());
+
+        this.buildIngredientCards();
+        this.syncStudioDOMValues();
+      }
+
+      buildIngredientCards() {
+        const listEl = document.getElementById("studio-ing-list");
+        if (!listEl) return;
+        listEl.innerHTML = "";
+
+        const f = this.activeFormula;
+        const isMassMode = f.mode === "mass";
+
+        if (f.ingredients.length === 0) {
+          listEl.innerHTML = `<div style="padding:28px;text-align:center;color:var(--text-secondary);">Workbench is empty. Tap <strong>+ Add Material / Accord</strong> to add raw materials or nested sub-accords.</div>`;
+          return;
+        }
+
+        f.ingredients.forEach((row, idx) => {
+          const isAccord = row.type === "accord";
+          const subForm = isAccord ? this.formulaMap[row.subFormulaId] : null;
+          const ing = !isAccord
+            ? (this.ingMap[row.ingredientId] || { name: row.nameSnapshot || "Archived Material", category: "Archived" })
+            : { name: subForm ? subForm.name : (row.nameSnapshot || "Nested Sub-Accord"), category: "Sub-Accord" };
+
+          const currentMass = FormulaEngine.calcMass(row.percentage, f.targetBatchSize);
+          const curDil = row.dilution !== undefined ? Number(row.dilution) : 100;
+          const curSolvent = row.solvent || "Neat";
+
+          const card = document.createElement("div");
+          card.className = `ing-row-card ${row.locked ? "is-locked" : ""} ${isAccord ? "sub-accord-card" : ""}`;
+
+          card.innerHTML = `
+            <div class="ing-row-top">
+              <div class="ing-row-title-wrap">
+                <button type="button" class="lock-toggle ${row.locked ? "locked" : ""}" title="${row.locked ? "Unlock" : "Lock"}">
+                  ${row.locked ? "🔒" : "🔓"}
+                </button>
+                <div style="min-width:0;flex:1;">
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    <span class="ing-name">${ing.name}</span>
+                    ${isAccord ? `<span class="accord-pill">❖ SUB-ACCORD</span>` : `<span class="ing-cat-badge">${ing.category}</span>`}
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap;">
+                    <select class="mini-select" data-dil-idx="${idx}" title="Stock Dilution Strength">
+                      ${DILUTION_PRESETS.map(d => `<option value="${d}" ${curDil === d ? "selected" : ""}>${d}% ${d === 100 ? "Neat" : "Dil."}</option>`).join("")}
+                    </select>
+                    <select class="mini-select" data-solv-idx="${idx}" title="Carrier Solvent" style="${curDil === 100 ? "display:none;" : ""}">
+                      ${SOLVENT_PRESETS.filter(s => s !== "Neat").map(s => `<option value="${s}" ${curSolvent === s ? "selected" : ""}>in ${s}</option>`).join("")}
+                    </select>
+                    <input type="text" class="input" data-note-idx="${idx}" value="${row.note || ""}" placeholder="Bench note..." style="padding:2px 6px;font-size:11px;height:22px;max-width:155px;">
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
+                ${isAccord ? `
+                  <button type="button" class="btn btn-outline btn-sm" data-inspect-accord="${idx}" title="Inspect sub-accord formula">🔍</button>
+                  <button type="button" class="btn btn-gold btn-sm" data-expand-accord="${idx}" title="Expand sub-accord into raw materials">⚡ Expand</button>
+                ` : `
+                  <button type="button" class="btn btn-outline btn-sm btn-icon" data-edit-mat="${row.ingredientId}" title="Edit material specs">✎</button>
+                `}
+                <span class="ing-mass-readout" data-mass-idx="${idx}">${isMassMode ? `${Number(row.percentage).toFixed(2)}%` : `${currentMass.toFixed(2)} g`}</span>
+                <button type="button" class="btn btn-danger btn-sm btn-icon" data-del-row="${idx}" title="Remove row">🗑</button>
+              </div>
+            </div>
+
+            <div class="ing-row-controls">
+              <button type="button" class="step-btn" data-step="-0.5" ${row.locked ? "disabled" : ""}>−</button>
+              <input type="range" class="range-slider" min="0" max="100" step="0.1" value="${row.percentage}" data-slider-idx="${idx}" ${row.locked ? "disabled" : ""}>
+              <button type="button" class="step-btn" data-step="0.5" ${row.locked ? "disabled" : ""}>+</button>
+              <div class="pct-input-wrap" style="width:92px;">
+                <input type="text" inputmode="decimal" class="pct-input" value="${isMassMode ? currentMass.toFixed(2) : Number(row.percentage).toFixed(2)}" data-num-idx="${idx}" ${row.locked ? "disabled" : ""}>
+                <span class="pct-unit">${isMassMode ? "g" : "%"}</span>
+              </div>
+            </div>
+          `;
+
+          // Lock toggle
+          card.querySelector(".lock-toggle").onclick = () => {
+            this.pushUndoState();
+            row.locked = !row.locked;
+            this.setDirty(true);
+            this.buildIngredientCards();
+            this.syncStudioDOMValues();
+          };
+
+          // Dilution & Solvent selectors
+          const dilSel = card.querySelector(`[data-dil-idx="${idx}"]`);
+          const solvSel = card.querySelector(`[data-solv-idx="${idx}"]`);
+          dilSel.onchange = e => {
+            this.pushUndoState();
+            row.dilution = parseFloat(e.target.value) || 100;
+            if (row.dilution === 100) {
+              row.solvent = "Neat";
+              solvSel.style.display = "none";
+            } else {
+              if (!row.solvent || row.solvent === "Neat") row.solvent = "DPG";
+              solvSel.style.display = "inline-block";
+              solvSel.value = row.solvent;
+            }
+            this.setDirty(true);
+            this.syncStudioDOMValues();
+          };
+          solvSel.onchange = e => {
+            row.solvent = e.target.value;
+            this.setDirty(true);
+          };
+
+          // Note input
+          card.querySelector(`[data-note-idx="${idx}"]`).addEventListener("input", e => {
+            row.note = e.target.value;
+            this.setDirty(true);
+          });
+
+          // Sub-Accord Inspect & Expand buttons
+          if (isAccord) {
+            card.querySelector(`[data-inspect-accord="${idx}"]`).onclick = () => this.inspectSubAccord(row);
+            card.querySelector(`[data-expand-accord="${idx}"]`).onclick = async () => {
+              const ok = await this.confirmDialog(
+                `Expand "${ing.name}"?`,
+                `Replace this sub-accord row (${Number(row.percentage).toFixed(2)}%) with its constituent raw materials scaled to match the exact batch percentages?`,
+                "Expand to Raw Materials"
+              );
+              if (!ok) return;
+              this.pushUndoState();
+              this.activeFormula.ingredients = FormulaEngine.expandSingleAccordRow(
+                this.activeFormula.ingredients,
+                idx,
+                this.formulaMap
+              );
+              this.setDirty(true);
+              this.buildIngredientCards();
+              this.syncStudioDOMValues();
+              this.toast(`Expanded ${ing.name} into raw materials`);
+            };
+          } else {
+            const editBtn = card.querySelector(`[data-edit-mat]`);
+            if (editBtn) {
+              editBtn.onclick = () => {
+                const mat = this.ingMap[row.ingredientId];
+                if (mat) this.openMaterialEditor(mat);
+              };
+            }
+          }
+
+          // Delete Row
+          card.querySelector(`[data-del-row="${idx}"]`).onclick = () => {
+            this.pushUndoState();
+            this.activeFormula.ingredients.splice(idx, 1);
+            this.setDirty(true);
+            this.buildIngredientCards();
+            this.syncStudioDOMValues();
+            this.toast(`Removed ${ing.name}`);
+          };
+
+          // Touch-safe Slider
+          const slider = card.querySelector(".range-slider");
+          slider.addEventListener("change", () => this.pushUndoState());
+          slider.addEventListener("input", e => {
+            this.applyProportionChange(idx, parseFloat(e.target.value) || 0, false);
+          });
+
+          // Android Backspace-Safe Numeric Input
+          const numInput = card.querySelector(".pct-input");
+          numInput.addEventListener("focus", () => {
+            this.pushUndoState();
+            numInput.select();
+          });
+          numInput.addEventListener("input", e => {
+            const raw = e.target.value.trim();
+            if (raw === "" || raw === ".") return;
+            const val = parseFloat(raw);
+            if (!isNaN(val) && val >= 0) {
+              this.applyProportionChange(idx, val, isMassMode);
+            }
+          });
+          numInput.addEventListener("blur", e => {
+            const raw = e.target.value.trim();
+            const val = raw === "" ? 0 : parseFloat(raw);
+            this.applyProportionChange(idx, isNaN(val) ? 0 : val, isMassMode);
+            const updatedMass = FormulaEngine.calcMass(this.activeFormula.ingredients[idx].percentage, f.targetBatchSize);
+            numInput.value = isMassMode
+              ? updatedMass.toFixed(2)
+              : Number(this.activeFormula.ingredients[idx].percentage).toFixed(2);
+          });
+
+          // +/- Step buttons
+          card.querySelectorAll(".step-btn").forEach(btn => {
+            btn.onclick = () => {
+              this.pushUndoState();
+              const delta = parseFloat(btn.getAttribute("data-step"));
+              if (isMassMode) {
+                const curG = FormulaEngine.calcMass(row.percentage, f.targetBatchSize);
+                this.applyProportionChange(idx, Math.max(0, curG + delta), true);
+              } else {
+                const nextVal = Math.max(0, Math.min(100, (Number(row.percentage) || 0) + delta));
+                this.applyProportionChange(idx, nextVal, false);
+              }
+            };
+          });
+
+          listEl.appendChild(card);
+        });
+      }
+
+      inspectSubAccord(row) {
+        const sub = this.formulaMap[row.subFormulaId];
+        const modal = document.getElementById("modal-accord-inspect");
+        const body = document.getElementById("accord-inspect-body");
+        if (!sub) {
+          this.toast("Sub-accord formula record not found");
+          return;
+        }
+        document.getElementById("accord-inspect-title").textContent = `❖ ${sub.name} (${Number(row.percentage).toFixed(2)}% in Formula)`;
+        const subSum = FormulaEngine.sumPercentages(sub.ingredients) || 100;
+
+        body.innerHTML = `
+          <p class="hud-sub" style="margin-bottom:12px;">${sub.description || "Reusable sub-accord premix."}</p>
+          <div class="table-scroll">
+            <table class="data-table" style="min-width:320px;">
+              <thead>
+                <tr>
+                  <th>Constituent</th>
+                  <th>In Accord %</th>
+                  <th>Effective in Parent %</th>
+                  <th>Batch Mass (g)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${sub.ingredients.map(c => {
+                  const effPct = (Number(row.percentage) * (Number(c.percentage) / subSum));
+                  const effMass = FormulaEngine.calcMass(effPct, this.activeFormula.targetBatchSize);
+                  const cName = c.type === "accord"
+                    ? (this.formulaMap[c.subFormulaId]?.name || c.nameSnapshot)
+                    : (this.ingMap[c.ingredientId]?.name || c.nameSnapshot);
+                  return `
+                    <tr>
+                      <td><strong>${cName}</strong></td>
+                      <td class="input-mono">${Number(c.percentage).toFixed(2)}%</td>
+                      <td class="input-mono" style="color:var(--accent-gold-bright)">${effPct.toFixed(3)}%</td>
+                      <td class="input-mono">${effMass.toFixed(3)} g</td>
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+        modal.classList.add("open");
+      }
+
+      applyProportionChange(idx, inputVal, isGramInput = false) {
+        const f = this.activeFormula;
+        if (isGramInput) {
+          const masses = f.ingredients.map((r, i) =>
+            i === idx ? Math.max(0, inputVal) : FormulaEngine.calcMass(r.percentage, f.targetBatchSize)
+          );
+          const newTotalMass = masses.reduce((a, b) => a + b, 0);
+          if (newTotalMass > 0) {
+            f.targetBatchSize = Number(newTotalMass.toFixed(2));
+            f.ingredients.forEach((r, i) => {
+              r.percentage = (masses[i] / newTotalMass) * 100;
+            });
+          }
+          const batchInput = document.getElementById("studio-batch-size");
+          if (batchInput && document.activeElement !== batchInput) {
+            batchInput.value = f.targetBatchSize;
+          }
+        } else if (f.mode === "auto" && f.ingredients.length > 1) {
+          const res = FormulaEngine.autoBalance(f.ingredients, idx, inputVal, f.strategy || "proportional");
+          if (res.success) {
+            f.ingredients = res.ingredients;
+          } else {
+            f.ingredients[idx].percentage = Math.max(0, Math.min(100, inputVal));
+          }
+        } else {
+          f.ingredients[idx].percentage = Math.max(0, Math.min(100, inputVal));
+        }
+        this.setDirty(true);
+        this.syncStudioDOMValues();
+      }
+
+      syncStudioDOMValues() {
+        const f = this.activeFormula;
+        const isMassMode = f.mode === "mass";
+
+        // Update row sliders & mass readouts
+        f.ingredients.forEach((row, idx) => {
+          const mass = FormulaEngine.calcMass(row.percentage, f.targetBatchSize);
+          const sliderEl = document.querySelector(`[data-slider-idx="${idx}"]`);
+          const numEl = document.querySelector(`[data-num-idx="${idx}"]`);
+          const massEl = document.querySelector(`[data-mass-idx="${idx}"]`);
+
+          if (sliderEl && document.activeElement !== sliderEl) sliderEl.value = row.percentage;
+          if (numEl && document.activeElement !== numEl) {
+            numEl.value = isMassMode ? mass.toFixed(2) : Number(row.percentage).toFixed(2);
+          }
+          if (massEl) {
+            massEl.textContent = isMassMode ? `${Number(row.percentage).toFixed(2)}%` : `${mass.toFixed(2)} g`;
+          }
+        });
+
+        // Flatten nested sub-accords for accurate cost & IFRA compliance checks
+        const flatIngredients = FormulaEngine.flattenFormula(f.ingredients, this.formulaMap);
+        let totalCost = 0;
+        let ifraViolations = 0;
+
+        flatIngredients.forEach(row => {
+          const ing = this.ingMap[row.ingredientId] || {};
+          const dilFactor = (row.dilution !== undefined ? Number(row.dilution) : 100) / 100;
+          const mass = FormulaEngine.calcMass(row.percentage, f.targetBatchSize);
+          totalCost += mass * dilFactor * ((ing.pricePerKg || 0) / 1000);
+          const activePct = row.percentage * dilFactor;
+          if (ing.ifraLimitCat4 && activePct > ing.ifraLimitCat4) ifraViolations++;
+        });
+
+        const totalPct = FormulaEngine.sumPercentages(f.ingredients);
+        const aromaticPct = FormulaEngine.calcActiveAromaticPercent(flatIngredients);
+        const balanced = Math.abs(100 - totalPct) < 0.05;
+
+        const pctEl = document.getElementById("hud-total-pct");
+        const stateEl = document.getElementById("hud-balance-state");
+        const aroEl = document.getElementById("hud-aromatic-pct");
+        const countEl = document.getElementById("hud-mat-count");
+        const costEl = document.getElementById("hud-batch-cost");
+        const gCostEl = document.getElementById("hud-gram-cost");
+        const ifraEl = document.getElementById("hud-ifra-status");
+
+        if (pctEl) {
+          pctEl.textContent = `${totalPct.toFixed(2)}%`;
+          pctEl.style.color = balanced ? "var(--status-ok)" : "var(--status-warn)";
+        }
+        if (stateEl) stateEl.textContent = balanced ? `Balanced (${(totalPct * 10).toFixed(0)}‰)` : `Delta: ${(100 - totalPct).toFixed(2)}%`;
+        if (aroEl) aroEl.textContent = `${aromaticPct.toFixed(2)}%`;
+        if (countEl) countEl.textContent = `${f.ingredients.length} Rows (${flatIngredients.length} Raw)`;
+        if (costEl) costEl.textContent = `${this.currency}${totalCost.toFixed(0)}`;
+        if (gCostEl) gCostEl.textContent = `${this.currency}${(totalCost / (f.targetBatchSize || 1)).toFixed(2)} / g`;
+        if (ifraEl) {
+          ifraEl.textContent = ifraViolations === 0 ? "PASS" : `${ifraViolations} Alert`;
+          ifraEl.style.color = ifraViolations === 0 ? "var(--status-ok)" : "var(--status-err)";
+        }
+
+        const analysis = FormulaEngine.analyzeAccord(f.ingredients, this.ingMap, this.formulaMap, true);
+        this.drawRadarSVG("studio-radar-svg", analysis.families);
+
+        const topB = document.getElementById("bar-pyr-top");
+        const heartB = document.getElementById("bar-pyr-heart");
+        const baseB = document.getElementById("bar-pyr-base");
+        if (topB && heartB && baseB) {
+          topB.style.width = `${analysis.pyramid.top}%`;
+          heartB.style.width = `${analysis.pyramid.heart}%`;
+          baseB.style.width = `${analysis.pyramid.base}%`;
+          document.getElementById("txt-pyr-top").textContent = `${analysis.pyramid.top.toFixed(1)}%`;
+          document.getElementById("txt-pyr-heart").textContent = `${analysis.pyramid.heart.toFixed(1)}%`;
+          document.getElementById("txt-pyr-base").textContent = `${analysis.pyramid.base.toFixed(1)}%`;
+        }
+      }
+
+      drawRadarSVG(containerId, familyScores) {
+        const box = document.getElementById(containerId);
+        if (!box) return;
+        const keys = FAMILIES;
+        const N = keys.length;
+        const size = 240, cx = 120, cy = 120, R = 82;
+
+        let rings = "";
+        [0.25, 0.5, 0.75, 1].forEach(r => {
+          rings += `<circle cx="${cx}" cy="${cy}" r="${R * r}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
+        });
+
+        let spokes = "";
+        const pts = [];
+        keys.forEach((k, i) => {
+          const angle = (Math.PI * 2 * i) / N - Math.PI / 2;
+          const x2 = cx + Math.cos(angle) * R;
+          const y2 = cy + Math.sin(angle) * R;
+          spokes += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+
+          const val = Math.min(100, Math.max(0, familyScores[k] || 0));
+          const pr = (val / 100) * R;
+          pts.push(`${(cx + Math.cos(angle) * pr).toFixed(1)},${(cy + Math.sin(angle) * pr).toFixed(1)}`);
+
+          const lx = cx + Math.cos(angle) * (R + 19);
+          const ly = cy + Math.sin(angle) * (R + 19);
+          spokes += `<text x="${lx}" y="${ly}" fill="var(--text-secondary)" font-size="8.5" font-weight="600" text-anchor="middle" dominant-baseline="central">${k.slice(0, 4).toUpperCase()}</text>`;
+        });
+
+        box.innerHTML = `
+          <svg viewBox="0 0 ${size} ${size}" width="100%" height="235" style="max-width:260px;">
+            ${rings}
+            ${spokes}
+            <polygon points="${pts.join(" ")}" fill="rgba(212, 175, 55, 0.28)" stroke="var(--accent-gold-bright)" stroke-width="2"/>
+          </svg>
+        `;
+      }
+
+      // --- UPGRADED PICKER MODAL: RAW MATERIALS OR NESTED SUB-ACCORDS ---
+      openIngredientModal() {
+        const modal = document.getElementById("modal-ing-picker");
+        const search = document.getElementById("ing-picker-search");
+        const results = document.getElementById("ing-picker-results");
+        modal.classList.add("open");
+
+        let pickerMode = "raw"; // "raw" | "accord"
+
+        const renderList = (q = "") => {
+          const term = q.toLowerCase();
+          const tabsHTML = `
+            <div class="picker-tabs">
+              <button type="button" class="btn ${pickerMode === "raw" ? "btn-gold" : "btn-outline"} btn-sm" id="tab-pick-raw">Raw Materials (${this.ingredients.length})</button>
+              <button type="button" class="btn ${pickerMode === "accord" ? "btn-gold" : "btn-outline"} btn-sm" id="tab-pick-accord">❖ Saved Sub-Accords (${this.formulas.length})</button>
+            </div>
+          `;
+
+          if (pickerMode === "raw") {
+            const filtered = this.ingredients.filter(i =>
+              i.name.toLowerCase().includes(term) ||
+              i.category.toLowerCase().includes(term) ||
+              (i.botanicalName && i.botanicalName.toLowerCase().includes(term))
+            );
+
+            results.innerHTML = tabsHTML + filtered.map(ing => `
+              <div class="ing-row-card" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" data-pick-id="${ing.id}">
+                <div>
+                  <div class="ing-name">${ing.name}</div>
+                  <div class="hud-sub">${ing.category} • ${this.currency}${((ing.pricePerKg || 0) / 1000).toFixed(1)}/g • IFRA: ${ing.ifraLimitCat4 ?? 100}%</div>
+                </div>
+                <button class="btn btn-gold btn-sm">+ Add</button>
+              </div>
+            `).join("");
+          } else {
+            const candidateFormulas = this.formulas.filter(f =>
+              f.id !== this.activeFormula.id &&
+              (f.name.toLowerCase().includes(term) || (f.description && f.description.toLowerCase().includes(term)))
+            );
+
+            results.innerHTML = tabsHTML + (candidateFormulas.length === 0
+              ? `<div style="padding:18px;text-align:center;color:var(--text-secondary);">No other saved formulas/accords available to nest.</div>`
+              : candidateFormulas.map(sub => `
+                <div class="ing-row-card sub-accord-card" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" data-pick-accord="${sub.id}">
+                  <div>
+                    <div class="ing-name">❖ ${sub.name} <span class="ing-cat-badge">v${sub.version || "1.0"}</span></div>
+                    <div class="hud-sub">${sub.ingredients.length} components • ${sub.description || "Reusable sub-accord"}</div>
+                  </div>
+                  <button class="btn btn-gold btn-sm">+ Nest Accord</button>
+                </div>
+              `).join(""));
+          }
+
+          results.querySelector("#tab-pick-raw").onclick = () => {
+            pickerMode = "raw";
+            renderList(search.value);
+          };
+          results.querySelector("#tab-pick-accord").onclick = () => {
+            pickerMode = "accord";
+            renderList(search.value);
+          };
+
+          results.querySelectorAll("[data-pick-id]").forEach(el => {
+            el.onclick = () => {
+              const id = el.getAttribute("data-pick-id");
+              const ingObj = this.ingMap[id];
+              this.pushUndoState();
+              this.activeFormula.ingredients.push({
+                type: "ingredient",
+                ingredientId: id,
+                nameSnapshot: ingObj ? ingObj.name : "Material",
+                percentage: 5.0,
+                dilution: 100,
+                solvent: "Neat",
+                locked: false,
+                note: ""
+              });
+              modal.classList.remove("open");
+              this.setDirty(true);
+              this.buildIngredientCards();
+              this.syncStudioDOMValues();
+              this.toast(`Added ${ingObj ? ingObj.name : "material"}`);
+            };
+          });
+
+          results.querySelectorAll("[data-pick-accord]").forEach(el => {
+            el.onclick = () => {
+              const subId = el.getAttribute("data-pick-accord");
+              const subObj = this.formulaMap[subId];
+              if (!subObj) return;
+
+              // Check for circular dependency
+              const tempMap = { ...this.formulaMap, [this.activeFormula.id]: this.activeFormula };
+              if (FormulaEngine.hasCircularReference(this.activeFormula.id, subId, tempMap)) {
+                this.toast("Blocked: Circular sub-accord reference detected!");
+                return;
+              }
+
+              this.pushUndoState();
+              this.activeFormula.ingredients.push({
+                type: "accord",
+                subFormulaId: subId,
+                nameSnapshot: subObj.name,
+                percentage: 10.0,
+                dilution: 100,
+                solvent: "Neat",
+                locked: false,
+                note: "Nested Sub-Accord"
+              });
+              modal.classList.remove("open");
+              this.setDirty(true);
+              this.buildIngredientCards();
+              this.syncStudioDOMValues();
+              this.toast(`Nested sub-accord "${subObj.name}"`);
+            };
+          });
+        };
+
+        search.value = "";
+        search.oninput = e => renderList(e.target.value);
+        renderList();
+      }
+
+      // --- MATERIAL SPECIFICATION MODAL ---
+      openMaterialEditor(existingIng = null) {
+        const isEdit = Boolean(existingIng);
+        const model = existingIng ? JSON.parse(JSON.stringify(existingIng)) : {
+          id: "ing_" + Date.now(),
+          name: "",
+          botanicalName: "",
+          casNumber: "",
+          category: "Essential oils",
+          origin: "Kannauj, India",
+          density: 0.950,
+          flashPoint: 95,
+          pricePerKg: 45000,
+          stockGrams: 250,
+          ifraLimitCat4: 100,
+          verificationStatus: "User-Entered",
+          notes: "",
+          ratings: { woody: 30, floral: 30, citrus: 0, fresh: 15, sweet: 20, spicy: 10, earthy: 20, resinous: 20, musky: 15, green: 5, smoky: 0, powdery: 10, animalic: 0 },
+          pyramid: { top: 25, heart: 45, base: 30 },
+          intensity: 70
+        };
+
+        const modal = document.getElementById("modal-ing-editor");
+        document.getElementById("ing-editor-title").textContent = isEdit ? `Edit: ${model.name}` : "New Laboratory Material";
+        const body = document.getElementById("ing-editor-body");
+
+        body.innerHTML = `
+          <div style="display:grid;gap:12px;">
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label">Material Name *</label>
+                <div class="input-clear-wrap">
+                  <input type="text" id="ed-name" class="input" value="${model.name}" placeholder="e.g. Ruh Motia (Jasmine Sambac)">
+                  <button type="button" class="clear-field-btn" data-clear="ed-name">✕</button>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Category</label>
+                <select id="ed-cat" class="select">
+                  ${CATEGORIES.map(c => `<option value="${c}" ${model.category === c ? "selected" : ""}>${c}</option>`).join("")}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="field-group">
+                <label class="field-label">Botanical / Chemical Name</label>
+                <input type="text" id="ed-bot" class="input" value="${model.botanicalName || ""}" placeholder="Jasminum sambac">
+              </div>
+              <div class="field-group">
+                <label class="field-label">CAS Number</label>
+                <input type="text" id="ed-cas" class="input input-mono" value="${model.casNumber || ""}" placeholder="8022-96-6">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Origin / Supplier</label>
+                <input type="text" id="ed-orig" class="input" value="${model.origin || ""}" placeholder="Kannauj, India">
+              </div>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="field-group">
+                <label class="field-label">Density (g/mL)</label>
+                <input type="text" inputmode="decimal" id="ed-dens" class="input input-mono" value="${model.density}">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Price per Kg (${this.currency})</label>
+                <input type="text" inputmode="decimal" id="ed-price" class="input input-mono" value="${model.pricePerKg}">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Stock (g)</label>
+                <input type="text" inputmode="decimal" id="ed-stock" class="input input-mono" value="${model.stockGrams}">
+              </div>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="field-group">
+                <label class="field-label">IFRA Cat 4 Max Limit (%)</label>
+                <input type="text" inputmode="decimal" id="ed-ifra" class="input input-mono" value="${model.ifraLimitCat4 ?? 100}">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Perceived Intensity (1-100)</label>
+                <input type="text" inputmode="decimal" id="ed-int" class="input input-mono" value="${model.intensity || 70}">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Safety Status</label>
+                <select id="ed-ver" class="select">
+                  <option value="Verified (IFRA 51st)" ${model.verificationStatus?.includes("Verified") ? "selected" : ""}>Verified (IFRA 51st)</option>
+                  <option value="User-Entered" ${model.verificationStatus === "User-Entered" ? "selected" : ""}>User-Entered</option>
+                  <option value="Unknown / Incomplete" ${model.verificationStatus?.includes("Unknown") ? "selected" : ""}>Unknown / Incomplete</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Evaporation Role Weights (Top / Heart / Base : 0–100)</label>
+              <div class="form-grid-3">
+                <input type="number" id="ed-pyr-t" class="input input-mono" value="${model.pyramid?.top ?? 25}" min="0" max="100" placeholder="Top">
+                <input type="number" id="ed-pyr-h" class="input input-mono" value="${model.pyramid?.heart ?? 45}" min="0" max="100" placeholder="Heart">
+                <input type="number" id="ed-pyr-b" class="input input-mono" value="${model.pyramid?.base ?? 30}" min="0" max="100" placeholder="Base">
+              </div>
+            </div>
+
+            <div style="border-top:1px solid var(--border-subtle);padding-top:10px;">
+              <label class="field-label" style="margin-bottom:8px;display:block;">Olfactory Family Profile Ratings (0–100)</label>
+              <div class="form-grid-2">
+                ${FAMILIES.map(f => `
+                  <div class="Descriptor-slider-row">
+                    <span style="text-transform:capitalize;font-size:12px;">${f}</span>
+                    <input type="range" class="range-slider" min="0" max="100" step="5" value="${model.ratings?.[f] || 0}" data-ed-fam="${f}">
+                    <span class="input-mono" style="font-size:11px;" id="ed-val-${f}">${model.ratings?.[f] || 0}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Odor Description & Distillation Notes</label>
+              <input type="text" id="ed-notes" class="input" value="${model.notes || ""}" placeholder="Rich floral heart, hydro-distilled...">
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:8px;border-top:1px solid var(--border-subtle);">
+              <button type="button" class="btn btn-gold" id="btn-save-mat">Save Material to Library</button>
+            </div>
+          </div>
+        `;
+
+        modal.classList.add("open");
+
+        body.querySelectorAll("[data-clear]").forEach(btn => {
+          btn.onclick = () => {
+            const target = document.getElementById(btn.getAttribute("data-clear"));
+            if (target) { target.value = ""; target.focus(); }
+          };
+        });
+
+        body.querySelectorAll("[data-ed-fam]").forEach(sl => {
+          sl.oninput = e => {
+            const f = sl.getAttribute("data-ed-fam");
+            document.getElementById(`ed-val-${f}`).textContent = e.target.value;
+          };
+        });
+
+        body.querySelector("#btn-save-mat").onclick = async () => {
+          const name = body.querySelector("#ed-name").value.trim();
+          if (!name) {
+            this.toast("Please enter a material name");
+            body.querySelector("#ed-name").focus();
+            return;
+          }
+          model.name = name;
+          model.category = body.querySelector("#ed-cat").value;
+          model.botanicalName = body.querySelector("#ed-bot").value.trim();
+          model.casNumber = body.querySelector("#ed-cas").value.trim();
+          model.origin = body.querySelector("#ed-orig").value.trim();
+          model.density = parseFloat(body.querySelector("#ed-dens").value) || 0.95;
+          model.pricePerKg = parseFloat(body.querySelector("#ed-price").value) || 0;
+          model.stockGrams = parseFloat(body.querySelector("#ed-stock").value) || 0;
+          model.ifraLimitCat4 = parseFloat(body.querySelector("#ed-ifra").value) || 100;
+          model.intensity = parseFloat(body.querySelector("#ed-int").value) || 70;
+          model.verificationStatus = body.querySelector("#ed-ver").value;
+          model.notes = body.querySelector("#ed-notes").value.trim();
+          model.pyramid = {
+            top: parseFloat(body.querySelector("#ed-pyr-t").value) || 0,
+            heart: parseFloat(body.querySelector("#ed-pyr-h").value) || 0,
+            base: parseFloat(body.querySelector("#ed-pyr-b").value) || 0
+          };
+          body.querySelectorAll("[data-ed-fam]").forEach(sl => {
+            model.ratings[sl.getAttribute("data-ed-fam")] = parseFloat(sl.value) || 0;
+          });
+
+          await this.db.put("ingredients", model);
+          await this.reloadDatabase();
+          modal.classList.remove("open");
+          this.toast(`Saved "${model.name}"`);
+          this.navigate(this.activeScreen);
+        };
+      }
+
+      // --- SCREEN 3: INGREDIENT LIBRARY ---
+      renderIngredients(vp) {
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head">
+              <span class="panel-title">Perfumery & Attar Material Library (${this.ingredients.length})</span>
+              <button class="btn btn-gold btn-sm" id="btn-new-ing">+ Create New Material</button>
+            </div>
+            <div class="panel-body">
+              <div class="input-clear-wrap" style="margin-bottom:12px;">
+                <input type="text" id="lib-filter-input" class="input" placeholder="Search by material name, CAS, botanical origin, category...">
+                <button type="button" class="clear-field-btn" id="clear-lib-search">✕</button>
+              </div>
+              <div id="lib-cards-container" style="display:flex;flex-direction:column;gap:8px;"></div>
+            </div>
+          </div>
+        `;
+
+        const listBox = vp.querySelector("#lib-cards-container");
+        const searchInput = vp.querySelector("#lib-filter-input");
+
+        const renderItems = (q = "") => {
+          const term = q.toLowerCase();
+          const list = this.ingredients.filter(i =>
+            i.name.toLowerCase().includes(term) ||
+            i.category.toLowerCase().includes(term) ||
+            (i.botanicalName && i.botanicalName.toLowerCase().includes(term)) ||
+            (i.casNumber && i.casNumber.toLowerCase().includes(term))
+          );
+
+          if (list.length === 0) {
+            listBox.innerHTML = `<div style="padding:24px;text-align:center;color:var(--text-secondary);">No matching materials found.</div>`;
+            return;
+          }
+
+          listBox.innerHTML = list.map(i => `
+            <div class="ing-row-card">
+              <div class="ing-row-top">
+                <div>
+                  <div class="ing-name">${i.name}</div>
+                  <div class="hud-sub">${i.botanicalName || "Synthetic / Accord"} • CAS: ${i.casNumber || "N/A"} • ${i.origin || "Lab"}</div>
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                  <span class="ing-cat-badge">${i.category}</span>
+                  <button type="button" class="btn btn-outline btn-sm" data-mat-edit="${i.id}">Edit</button>
+                  <button type="button" class="btn btn-outline btn-sm" data-mat-dup="${i.id}">Clone</button>
+                  <button type="button" class="btn btn-danger btn-sm" data-mat-del="${i.id}">🗑 Delete</button>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-secondary);flex-wrap:wrap;gap:8px;margin-top:6px;">
+                <span>Density: <strong>${i.density || "N/A"} g/mL</strong></span>
+                <span>IFRA Cat 4: <strong>${i.ifraLimitCat4 ?? 100}%</strong></span>
+                <span>Stock: <strong>${i.stockGrams || 0} g</strong></span>
+                <span>Cost: <strong>${this.currency}${((i.pricePerKg || 0) / 1000).toFixed(2)} / g</strong></span>
+              </div>
+            </div>
+          `).join("");
+
+          listBox.querySelectorAll("[data-mat-edit]").forEach(btn => {
+            btn.onclick = () => {
+              const mat = this.ingMap[btn.getAttribute("data-mat-edit")];
+              if (mat) this.openMaterialEditor(mat);
+            };
+          });
+
+          listBox.querySelectorAll("[data-mat-dup]").forEach(btn => {
+            btn.onclick = async () => {
+              const orig = this.ingMap[btn.getAttribute("data-mat-dup")];
+              if (!orig) return;
+              const copy = JSON.parse(JSON.stringify(orig));
+              copy.id = "ing_" + Date.now();
+              copy.name = orig.name + " (Copy)";
+              await this.db.put("ingredients", copy);
+              await this.reloadDatabase();
+              renderItems(searchInput.value);
+              this.toast(`Duplicated ${orig.name}`);
+            };
+          });
+
+          listBox.querySelectorAll("[data-mat-del]").forEach(btn => {
+            btn.onclick = async () => {
+              const id = btn.getAttribute("data-mat-del");
+              const mat = this.ingMap[id];
+              if (!mat) return;
+              const usedIn = this.formulas.filter(f => f.ingredients.some(r => r.ingredientId === id));
+              const warningText = usedIn.length > 0
+                ? `"${mat.name}" is referenced in ${usedIn.length} saved formula(s). Deleting it removes it from the library while preserving its snapshot name inside existing formulas.`
+                : `Permanently delete "${mat.name}" from your Ingredient Library?`;
+
+              const confirmed = await this.confirmDialog(`Delete ${mat.name}?`, warningText, "Delete Material");
+              if (!confirmed) return;
+
+              await this.db.delete("ingredients", id);
+              await this.reloadDatabase();
+              renderItems(searchInput.value);
+              this.toast(`Deleted ${mat.name}`);
+            };
+          });
+        };
+
+        searchInput.oninput = e => renderItems(e.target.value);
+        vp.querySelector("#clear-lib-search").onclick = () => {
+          searchInput.value = "";
+          renderItems("");
+          searchInput.focus();
+        };
+        vp.querySelector("#btn-new-ing").onclick = () => this.openMaterialEditor(null);
+
+        renderItems();
+      }
+
+      // --- SCREEN 4: ACCORD ANALYZER ---
+      renderAnalyzer(vp) {
+        const analysis = FormulaEngine.analyzeAccord(this.activeFormula.ingredients, this.ingMap, this.formulaMap, true);
+        vp.innerHTML = `
+          <div class="studio-layout">
+            <div class="panel">
+              <div class="panel-head"><span class="panel-title">13-Dimension Olfactory Profile (Recursive)</span></div>
+              <div class="panel-body">
+                ${FAMILIES.map(f => {
+                  const val = Math.min(100, analysis.families[f] || 0);
+                  return `
+                    <div class="profile-bar-row">
+                      <span style="text-transform:capitalize;color:var(--text-secondary);">${f}</span>
+                      <div class="profile-track"><div class="profile-fill" style="width:${val.toFixed(1)}%"></div></div>
+                      <span class="input-mono" style="font-size:11px;">${val.toFixed(0)}</span>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><span class="panel-title">Experimental Accord Optimizer</span></div>
+              <div class="panel-body">
+                <p class="hud-sub" style="margin-bottom:12px;">Select a target olfactory facet and apply recommended adjustments directly to your active formula:</p>
+                <div style="display:flex;gap:8px;margin-bottom:14px;">
+                  <select id="opt-target-family" class="select">
+                    ${FAMILIES.map(f => `<option value="${f}">Boost ${f.toUpperCase()} character</option>`).join("")}
+                  </select>
+                </div>
+                <div id="opt-suggestions-box" style="display:flex;flex-direction:column;gap:8px;"></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const runSuggestions = () => {
+          const fam = vp.querySelector("#opt-target-family").value;
+          const candidates = [...this.ingredients]
+            .filter(i => (i.ratings && i.ratings[fam] > 25))
+            .sort((a, b) => (b.ratings[fam] || 0) - (a.ratings[fam] || 0))
+            .slice(0, 4);
+
+          const box = vp.querySelector("#opt-suggestions-box");
+          box.innerHTML = candidates.map(c => `
+            <div class="ing-row-card" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+              <div>
+                <div class="ing-name">${c.name}</div>
+                <div class="hud-sub">${fam.toUpperCase()} Score: <strong>${c.ratings[fam]}/100</strong> • IFRA Max: ${c.ifraLimitCat4}%</div>
+              </div>
+              <button class="btn btn-gold btn-sm" data-apply-rec="${c.id}">+2.5% Trial</button>
+            </div>
+          `).join("");
+
+          box.querySelectorAll("[data-apply-rec]").forEach(btn => {
+            btn.onclick = () => {
+              const id = btn.getAttribute("data-apply-rec");
+              const mat = this.ingMap[id];
+              this.pushUndoState();
+              const existing = this.activeFormula.ingredients.find(x => x.type !== "accord" && x.ingredientId === id);
+              if (existing) {
+                existing.percentage = Math.min(100, Number(existing.percentage) + 2.5);
+              } else {
+                this.activeFormula.ingredients.push({
+                  type: "ingredient",
+                  ingredientId: id,
+                  nameSnapshot: mat.name,
+                  percentage: 2.5,
+                  dilution: 100,
+                  solvent: "Neat",
+                  locked: false,
+                  note: `Added for ${fam} boost`
+                });
+              }
+              this.setDirty(true);
+              this.toast(`Applied +2.5% ${mat.name}`);
+              this.navigate("studio");
+            };
+          });
+        };
+
+        vp.querySelector("#opt-target-family").onchange = runSuggestions;
+        runSuggestions();
+      }
+
+      // --- SCREEN 5: TRADITIONAL ATTAR DEG LOG ---
+      renderAttarWorkspace(vp) {
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head">
+              <span class="panel-title">Kannauj Deg-Bhapka Distillation & Maturation Log</span>
+            </div>
+            <div class="panel-body">
+              <div class="ing-row-card" style="margin-bottom:14px;">
+                <div class="field-label" style="margin-bottom:8px;">Record New Deg-Bhapka Batch</div>
+                <div class="form-grid-2" style="margin-bottom:8px;">
+                  <input type="text" id="deg-name" class="input" placeholder="Batch Name (e.g. Ruh Bela Lot #12)">
+                  <input type="text" id="deg-bot" class="input" placeholder="Flower/Botanical Charge (e.g. 300kg Jasmine)">
+                </div>
+                <div class="form-grid-2" style="margin-bottom:8px;">
+                  <input type="text" id="deg-base" class="input" placeholder="Bhapka Receiver Base (e.g. Mysore Sandalwood)">
+                  <input type="number" id="deg-days" class="input input-mono" placeholder="Maturation Days (e.g. 60)" value="60">
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <input type="text" id="deg-notes" class="input" placeholder="Kuppi decanting & sensory aging observations...">
+                  <button class="btn btn-gold" id="btn-save-deg">+ Save Log</button>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                ${this.attarLogs.map(log => `
+                  <div class="ing-row-card">
+                    <div class="ing-row-top">
+                      <span class="ing-name">${log.name}</span>
+                      <div style="display:flex;gap:6px;align-items:center;">
+                        <span class="status-pill pill-ok">${log.maturationDays} Days Cured</span>
+                        <button class="btn btn-danger btn-sm" data-del-deg="${log.id}">🗑</button>
+                      </div>
+                    </div>
+                    <div style="font-size:12.5px;color:var(--text-secondary);display:grid;gap:4px;">
+                      <div><strong>Botanical Charge:</strong> ${log.botanical}</div>
+                      <div><strong>Receiver Base (Bhapka):</strong> ${log.receiverBase}</div>
+                      <div><strong>Observations:</strong> ${log.aromaNotes}</div>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+
+        vp.querySelector("#btn-save-deg").onclick = async () => {
+          const name = vp.querySelector("#deg-name").value.trim();
+          if (!name) {
+            this.toast("Enter a distillation batch title");
+            return;
+          }
+          await this.db.put("attar_logs", {
+            id: "deg_" + Date.now(),
+            name,
+            botanical: vp.querySelector("#deg-bot").value.trim() || "Traditional Botanical Charge",
+            method: "Copper Deg-Bhapka Hydro-Distillation",
+            receiverBase: vp.querySelector("#deg-base").value.trim() || "East Indian Sandalwood",
+            maturationDays: parseInt(vp.querySelector("#deg-days").value, 10) || 30,
+            aromaNotes: vp.querySelector("#deg-notes").value.trim() || "Curing in camel-skin kuppi."
+          });
+          await this.reloadDatabase();
+          this.toast("Distillation batch logged");
+          this.renderAttarWorkspace(vp);
+        };
+
+        vp.querySelectorAll("[data-del-deg]").forEach(btn => {
+          btn.onclick = async () => {
+            await this.db.delete("attar_logs", btn.getAttribute("data-del-deg"));
+            await this.reloadDatabase();
+            this.toast("Log deleted");
+            this.renderAttarWorkspace(vp);
+          };
+        });
+      }
+
+      // --- SCREEN 6: BATCH COMPOUNDING & GRAVIMETRIC CUMULATIVE SCALE MODE ---
+      renderBatch(vp) {
+        const f = this.activeFormula;
+        const rowsToCompound = this.batchFlattenMode
+          ? FormulaEngine.flattenFormula(f.ingredients, this.formulaMap)
+          : f.ingredients;
+
+        const cumWeights = FormulaEngine.calcCumulativeWeights(rowsToCompound, f.targetBatchSize);
+
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="panel-title">Gravimetric Compounding Sheet: ${f.name}</span>
+                <div class="hud-sub">Check off rows as you pour onto your scale. Σ Cumulative column shows target scale reading without re-taring.</div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button class="btn ${this.batchFlattenMode ? "btn-gold" : "btn-outline"} btn-sm" id="btn-toggle-flatten">
+                  ${this.batchFlattenMode ? "✓ Sub-Accords Flattened" : "Flatten Nested Sub-Accords"}
+                </button>
+                <button class="btn btn-gold btn-sm" id="btn-deduct-stock">Deduct Stock</button>
+                <button class="btn btn-outline btn-sm" onclick="window.print()">Print</button>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+                ${[10, 25, 50, 100, 250, 500, 1000].map(sz => `
+                  <button class="btn ${f.targetBatchSize === sz ? "btn-gold" : "btn-outline"} btn-sm" data-preset-sz="${sz}">${sz}g</button>
+                `).join("")}
+              </div>
+
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width:42px;">Poured</th>
+                      <th>Material / Component</th>
+                      <th>Dilution</th>
+                      <th>% w/w</th>
+                      <th>Pour Mass (g)</th>
+                      <th>Σ Scale Target (g)</th>
+                      <th>Stock Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${rowsToCompound.map((row, idx) => {
+                      const isAccord = row.type === "accord";
+                      const ing = !isAccord ? (this.ingMap[row.ingredientId] || {}) : {};
+                      const name = isAccord
+                        ? `❖ ${this.formulaMap[row.subFormulaId]?.name || row.nameSnapshot}`
+                        : (ing.name || row.nameSnapshot || "Unknown");
+                      const { mass, cumulative } = cumWeights[idx];
+                      const avail = ing.stockGrams || 0;
+                      const short = !isAccord && avail < mass;
+                      const checkKey = `${f.id}_${idx}`;
+                      const isChecked = Boolean(this.weighedChecks[checkKey]);
+
+                      return `
+                        <tr class="${isChecked ? "weighed-row" : ""}" id="batch-row-${idx}">
+                          <td><input type="checkbox" data-weigh-chk="${checkKey}" data-row-i="${idx}" ${isChecked ? "checked" : ""} style="width:18px;height:18px;cursor:pointer;"></td>
+                          <td><strong>${name}</strong></td>
+                          <td class="input-mono">${row.dilution ?? 100}% ${row.solvent && row.solvent !== "Neat" ? `in ${row.solvent}` : "Neat"}</td>
+                          <td class="input-mono">${Number(row.percentage).toFixed(2)}%</td>
+                          <td class="input-mono" style="color:var(--accent-gold-bright);font-weight:700;">${mass.toFixed(3)} g</td>
+                          <td class="input-mono" style="color:#56cfe1;font-weight:700;">${cumulative.toFixed(3)} g</td>
+                          <td>
+                            ${isAccord
+                              ? `<span class="accord-pill">Premix</span>`
+                              : `<span class="status-pill ${short ? "pill-err" : "pill-ok"}">${avail.toFixed(1)} g ${short ? "(Low)" : ""}</span>`}
+                          </td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        `;
+
+        vp.querySelector("#btn-toggle-flatten").onclick = () => {
+          this.batchFlattenMode = !this.batchFlattenMode;
+          this.renderBatch(vp);
+        };
+
+        vp.querySelectorAll("[data-weigh-chk]").forEach(chk => {
+          chk.onchange = e => {
+            const key = chk.getAttribute("data-weigh-chk");
+            const rowI = chk.getAttribute("data-row-i");
+            this.weighedChecks[key] = e.target.checked;
+            const tr = document.getElementById(`batch-row-${rowI}`);
+            if (tr) tr.classList.toggle("weighed-row", e.target.checked);
+          };
+        });
+
+        vp.querySelectorAll("[data-preset-sz]").forEach(btn => {
+          btn.onclick = () => {
+            this.activeFormula.targetBatchSize = Number(btn.getAttribute("data-preset-sz"));
+            this.renderBatch(vp);
+          };
+        });
+
+        vp.querySelector("#btn-deduct-stock").onclick = async () => {
+          const flat = FormulaEngine.flattenFormula(f.ingredients, this.formulaMap);
+          const ok = await this.confirmDialog(
+            "Deduct Batch from Inventory?",
+            `Subtract required raw material weights (including flattened sub-accords) for a ${f.targetBatchSize}g batch of "${f.name}"?`,
+            "Deduct Stock"
+          );
+          if (!ok) return;
+          for (const row of flat) {
+            const ing = this.ingMap[row.ingredientId];
+            if (ing) {
+              const dilFactor = (row.dilution !== undefined ? Number(row.dilution) : 100) / 100;
+              const used = FormulaEngine.calcMass(row.percentage, f.targetBatchSize) * dilFactor;
+              ing.stockGrams = Math.max(0, Number((ing.stockGrams - used).toFixed(2)));
+              await this.db.put("ingredients", ing);
+            }
+          }
+          await this.reloadDatabase();
+          this.toast("Inventory stock deducted");
+          this.renderBatch(vp);
+        };
+      }
+
+      // --- SCREEN 7: DILUTION CALCULATOR ---
+      renderDilution(vp) {
+        vp.innerHTML = `
+          <div class="panel" style="max-width:520px;margin:0 auto;">
+            <div class="panel-head"><span class="panel-title">Mass-Balance Dilution Calculator (C₁M₁ = C₂M₂)</span></div>
+            <div class="panel-body" style="display:grid;gap:12px;">
+              <div class="field-group">
+                <label class="field-label">Initial Concentrate Concentration C₁ (% w/w)</label>
+                <input type="text" inputmode="decimal" id="dil-c1" class="input input-mono" value="100">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Target Final Concentration C₂ (% w/w) — e.g. 20% EDP</label>
+                <input type="text" inputmode="decimal" id="dil-c2" class="input input-mono" value="20">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Target Final Batch Mass M₂ (grams)</label>
+                <input type="text" inputmode="decimal" id="dil-m2" class="input input-mono" value="50">
+              </div>
+              <button class="btn btn-gold" id="btn-calc-dil">Calculate Exact Weights</button>
+              <div id="dil-result-card" class="ing-row-card" style="display:none;"></div>
+            </div>
+          </div>
+        `;
+
+        const calc = () => {
+          const box = vp.querySelector("#dil-result-card");
+          try {
+            const res = FormulaEngine.calculateDilution(
+              vp.querySelector("#dil-c1").value,
+              vp.querySelector("#dil-c2").value,
+              vp.querySelector("#dil-m2").value
+            );
+            box.style.display = "block";
+            box.innerHTML = `
+              <div style="display:grid;gap:6px;font-family:var(--font-mono);font-size:13px;">
+                <div>Concentrate Mass (M₁): <strong style="color:var(--accent-gold-bright)">${res.concentrateMass.toFixed(3)} g</strong></div>
+                <div>Diluent / Carrier Mass: <strong style="color:#5ce09b">${res.diluentMass.toFixed(3)} g</strong></div>
+                <div>Total Final Mass (M₂): <strong>${res.finalMass.toFixed(3)} g</strong></div>
+              </div>
+            `;
+          } catch (e) {
+            box.style.display = "block";
+            box.innerHTML = `<span style="color:var(--status-err)">${e.message}</span>`;
+          }
+        };
+        vp.querySelector("#btn-calc-dil").onclick = calc;
+        calc();
+      }
+
+      // --- SCREEN 8: FORMULA COMPARISON ---
+      renderComparison(vp) {
+        const fA = this.formulas[0] || this.activeFormula;
+        const fB = this.formulas[1] || this.activeFormula;
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title">Side-by-Side Flattened Raw Material Comparison</span></div>
+            <div class="panel-body">
+              <div class="form-grid-2" style="margin-bottom:12px;">
+                <select id="cmp-sel-a" class="select">
+                  ${this.formulas.map(f => `<option value="${f.id}" ${f.id === fA.id ? "selected" : ""}>Formula A: ${f.name} (v${f.version || "1.0"})</option>`).join("")}
+                </select>
+                <select id="cmp-sel-b" class="select">
+                  ${this.formulas.map(f => `<option value="${f.id}" ${f.id === fB.id ? "selected" : ""}>Formula B: ${f.name} (v${f.version || "1.0"})</option>`).join("")}
+                </select>
+              </div>
+              <div class="table-scroll" id="cmp-table-box"></div>
+            </div>
+          </div>
+        `;
+
+        const updateTable = () => {
+          const left = this.formulas.find(x => x.id === vp.querySelector("#cmp-sel-a").value) || fA;
+          const right = this.formulas.find(x => x.id === vp.querySelector("#cmp-sel-b").value) || fB;
+          const flatA = FormulaEngine.flattenFormula(left.ingredients, this.formulaMap);
+          const flatB = FormulaEngine.flattenFormula(right.ingredients, this.formulaMap);
+
+          const allIds = Array.from(new Set([...flatA.map(i => i.ingredientId), ...flatB.map(i => i.ingredientId)]));
+
+          vp.querySelector("#cmp-table-box").innerHTML = `
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Raw Material (Flattened)</th>
+                  <th>${left.name}</th>
+                  <th>${right.name}</th>
+                  <th>Delta (B − A)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${allIds.map(id => {
+                  const ing = this.ingMap[id] || { name: id };
+                  const pA = flatA.find(x => x.ingredientId === id)?.percentage || 0;
+                  const pB = flatB.find(x => x.ingredientId === id)?.percentage || 0;
+                  const diff = pB - pA;
+                  return `
+                    <tr>
+                      <td><strong>${ing.name}</strong></td>
+                      <td class="input-mono">${pA.toFixed(2)}%</td>
+                      <td class="input-mono">${pB.toFixed(2)}%</td>
+                      <td class="input-mono" style="color:${diff > 0 ? "#5ce09b" : diff < 0 ? "#ff8582" : "var(--text-muted)"}">
+                        ${diff > 0 ? "+" : ""}${diff.toFixed(2)}%
+                      </td>
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
+          `;
+        };
+
+        vp.querySelector("#cmp-sel-a").onchange = updateTable;
+        vp.querySelector("#cmp-sel-b").onchange = updateTable;
+        updateTable();
+      }
+
+      // --- SCREEN 9: COST & INVENTORY ---
+      renderCosting(vp) {
+        const f = this.activeFormula;
+        const flat = FormulaEngine.flattenFormula(f.ingredients, this.formulaMap);
+        let rawCost = 0;
+        flat.forEach(r => {
+          const ing = this.ingMap[r.ingredientId] || {};
+          const dilFactor = (r.dilution !== undefined ? Number(r.dilution) : 100) / 100;
+          const mass = FormulaEngine.calcMass(r.percentage, f.targetBatchSize) * dilFactor;
+          rawCost += mass * ((ing.pricePerKg || 0) / 1000);
+        });
+        const costPerGram = rawCost / (f.targetBatchSize || 1);
+
+        vp.innerHTML = `
+          <div class="hud-grid">
+            <div class="hud-card"><span class="hud-label">Batch Raw Cost</span><span class="hud-val">${this.currency}${rawCost.toFixed(2)}</span><span class="hud-sub">For ${f.targetBatchSize}g</span></div>
+            <div class="hud-card"><span class="hud-label">Cost Per Gram</span><span class="hud-val">${this.currency}${costPerGram.toFixed(2)}</span><span class="hud-sub">Includes Sub-Accords</span></div>
+            <div class="hud-card"><span class="hud-label">3g Quarter-Tola</span><span class="hud-val">${this.currency}${(costPerGram * 3 + 45).toFixed(0)}</span><span class="hud-sub">Incl. ${this.currency}45 vial</span></div>
+            <div class="hud-card"><span class="hud-label">12g Full-Tola</span><span class="hud-val">${this.currency}${(costPerGram * 12 + 120).toFixed(0)}</span><span class="hud-sub">Incl. ${this.currency}120 bottle</span></div>
+          </div>
+        `;
+      }
+
+      // --- SCREEN 10: FORMULA & SUB-ACCORD LIBRARY ---
+      renderLibrary(vp) {
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head">
+              <span class="panel-title">Formulas & Reusable Sub-Accords (${this.formulas.length})</span>
+            </div>
+            <div class="panel-body" style="display:grid;gap:10px;">
+              ${this.formulas.map(f => `
+                <div class="ing-row-card ${f.isAccord ? "sub-accord-card" : ""}" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                  <div>
+                    <div class="ing-name">
+                      ${f.name}
+                      ${f.isAccord ? `<span class="accord-pill">❖ SUB-ACCORD</span>` : `<span class="ing-cat-badge">v${f.version || "1.0"}</span>`}
+                    </div>
+                    <div class="hud-sub">${f.ingredients.length} rows • ${f.targetBatchSize}g • Updated ${f.updatedAt || "Recently"}</div>
+                  </div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button class="btn btn-gold btn-sm" data-lib-open="${f.id}">Load in Studio</button>
+                    <button class="btn btn-outline btn-sm" data-lib-nest="${f.id}">+ Nest in Active</button>
+                    <button class="btn btn-outline btn-sm" data-lib-dup="${f.id}">Duplicate</button>
+                    <button class="btn btn-danger btn-sm" data-lib-del="${f.id}">🗑</button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+
+        vp.querySelectorAll("[data-lib-open]").forEach(b => {
+          b.onclick = () => {
+            const f = this.formulas.find(x => x.id === b.getAttribute("data-lib-open"));
+            if (f) {
+              this.activeFormula = JSON.parse(JSON.stringify(f));
+              this.setDirty(false);
+              this.navigate("studio");
+            }
+          };
+        });
+
+        vp.querySelectorAll("[data-lib-nest]").forEach(b => {
+          b.onclick = () => {
+            const subId = b.getAttribute("data-lib-nest");
+            const sub = this.formulaMap[subId];
+            if (!sub) return;
+            const tempMap = { ...this.formulaMap, [this.activeFormula.id]: this.activeFormula };
+            if (FormulaEngine.hasCircularReference(this.activeFormula.id, subId, tempMap)) {
+              this.toast("Cannot nest a formula inside itself (Circular Reference)");
+              return;
+            }
+            this.pushUndoState();
+            this.activeFormula.ingredients.push({
+              type: "accord",
+              subFormulaId: subId,
+              nameSnapshot: sub.name,
+              percentage: 10.0,
+              dilution: 100,
+              solvent: "Neat",
+              locked: false,
+              note: "Nested from Library"
+            });
+            this.setDirty(true);
+            this.toast(`Nested "${sub.name}" into ${this.activeFormula.name}`);
+            this.navigate("studio");
+          };
+        });
+
+        vp.querySelectorAll("[data-lib-dup]").forEach(b => {
+          b.onclick = async () => {
+            const orig = this.formulas.find(x => x.id === b.getAttribute("data-lib-dup"));
+            if (!orig) return;
+            const copy = JSON.parse(JSON.stringify(orig));
+            copy.id = "form_" + Date.now();
+            copy.name = orig.name + " (Copy)";
+            await this.db.put("formulas", copy);
+            await this.reloadDatabase();
+            this.toast("Duplicated");
+            this.renderLibrary(vp);
+          };
+        });
+
+        vp.querySelectorAll("[data-lib-del]").forEach(b => {
+          b.onclick = async () => {
+            const id = b.getAttribute("data-lib-del");
+            const target = this.formulas.find(x => x.id === id);
+            if (!target) return;
+            const ok = await this.confirmDialog(`Delete "${target.name}"?`, "Permanently remove this formula/accord from your library?", "Delete");
+            if (!ok) return;
+            await this.db.delete("formulas", id);
+            await this.reloadDatabase();
+            this.toast("Deleted");
+            this.renderLibrary(vp);
+          };
+        });
+      }
+
+      // --- SCREEN 11: SAFETY & IFRA REVIEW (RECURSIVE FLATTENED AUDIT) ---
+      renderSafety(vp) {
+        const f = this.activeFormula;
+        const flatRows = FormulaEngine.flattenFormula(f.ingredients, this.formulaMap);
+
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title">IFRA 51st Amendment Compliance Table (Flattened Raw Materials)</span></div>
+            <div class="panel-body">
+              <p class="hud-sub" style="margin-bottom:12px;">Nested sub-accords and pre-dilutions are automatically resolved to compute net active raw material percentages against IFRA Category 4 limits.</p>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Raw Material</th>
+                      <th>Gross %</th>
+                      <th>Net Active %</th>
+                      <th>IFRA Cat 4 Max</th>
+                      <th>Verification Status</th>
+                      <th>Result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${flatRows.map(r => {
+                      const ing = this.ingMap[r.ingredientId] || {};
+                      const dil = r.dilution !== undefined ? Number(r.dilution) : 100;
+                      const netActive = Number(r.percentage) * (dil / 100);
+                      const max = ing.ifraLimitCat4 ?? 100;
+                      const ok = netActive <= max;
+                      return `
+                        <tr>
+                          <td><strong>${ing.name || r.nameSnapshot || "Unknown"}</strong></td>
+                          <td class="input-mono">${Number(r.percentage).toFixed(2)}%</td>
+                          <td class="input-mono" style="color:var(--accent-gold-bright)">${netActive.toFixed(3)}%</td>
+                          <td class="input-mono">${max}%</td>
+                          <td>${ing.verificationStatus || "Unverified"}</td>
+                          <td><span class="status-pill ${ok ? "pill-ok" : "pill-err"}">${ok ? "COMPLIANT" : "EXCEEDS LIMIT"}</span></td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // --- SCREEN 12: QA MATH VERIFICATION SUITE (10 AUTOMATED TESTS) ---
+      renderTests(vp) {
+        const suite = [
+          {
+            name: "TEST 1: Percentage to Mass (25% of 100g = 25g)",
+            pass: Math.abs(FormulaEngine.calcMass(25, 100) - 25.0) < 1e-6
+          },
+          {
+            name: "TEST 2: Batch Scaling (60% & 40% on 250g = 150g & 100g)",
+            pass: Math.abs(FormulaEngine.calcMass(60, 250) - 150) < 1e-6 && Math.abs(FormulaEngine.calcMass(40, 250) - 100) < 1e-6
+          },
+          {
+            name: "TEST 3: Percentage Total Integrity (25% + 35% + 40% = 100%)",
+            pass: Math.abs(FormulaEngine.sumPercentages([{ percentage: 25 }, { percentage: 35 }, { percentage: 40 }]) - 100) < 1e-6
+          },
+          {
+            name: "TEST 4: Mass-to-Volume Conversion (10g @ 0.8 g/mL = 12.5 mL)",
+            pass: Math.abs(FormulaEngine.massToVolume(10, 0.8) - 12.5) < 1e-6
+          },
+          {
+            name: "TEST 5: Mass-Based Dilution (100% -> 20% w/w for 50g = 10g conc + 40g diluent)",
+            pass: (() => {
+              const r = FormulaEngine.calculateDilution(100, 20, 50);
+              return Math.abs(r.concentrateMass - 10) < 1e-6 && Math.abs(r.diluentMass - 40) < 1e-6;
+            })()
+          },
+          {
+            name: "TEST 6: Invalid Zero Density Rejection",
+            pass: (() => {
+              try { FormulaEngine.massToVolume(10, 0); return false; } catch { return true; }
+            })()
+          },
+          {
+            name: "TEST 7: Auto-Balance Preserves Locked Ingredients & 100.00% Sum",
+            pass: (() => {
+              const init = [
+                { ingredientId: "a", percentage: 50, locked: true },
+                { ingredientId: "b", percentage: 30, locked: false },
+                { ingredientId: "c", percentage: 20, locked: false }
+              ];
+              const res = FormulaEngine.autoBalance(init, 1, 40, "proportional");
+              return res.success && res.ingredients[0].percentage === 50 && Math.abs(FormulaEngine.sumPercentages(res.ingredients) - 100) < 1e-5;
+            })()
+          },
+          {
+            name: "TEST 8: Nested Sub-Accord Flattening & Circular Reference Rejection",
+            pass: (() => {
+              const mockMap = {
+                acc1: { id: "acc1", ingredients: [{ type: "accord", subFormulaId: "acc2", percentage: 100 }] },
+                acc2: { id: "acc2", ingredients: [{ type: "ingredient", ingredientId: "x", percentage: 50 }, { type: "ingredient", ingredientId: "y", percentage: 50 }] }
+              };
+              const cycleDetected = FormulaEngine.hasCircularReference("acc2", "acc1", mockMap);
+              const flat = FormulaEngine.flattenFormula([{ type: "accord", subFormulaId: "acc2", percentage: 20 }, { type: "ingredient", ingredientId: "x", percentage: 80 }], mockMap);
+              const xMerged = flat.find(i => i.ingredientId === "x")?.percentage || 0;
+              return cycleDetected === true && Math.abs(xMerged - 90.0) < 1e-5;
+            })()
+          },
+          {
+            name: "TEST 9: Active Aromatic Concentration under Pre-Dilution (10% @ 10% dil + 90% Neat = 91%)",
+            pass: (() => {
+              const active = FormulaEngine.calcActiveAromaticPercent([
+                { percentage: 10, dilution: 10 },
+                { percentage: 90, dilution: 100 }
+              ]);
+              return Math.abs(active - 91.0) < 1e-5;
+            })()
+          },
+          {
+            name: "TEST 10: Cumulative Gravimetric Bench Scale Target Calculation",
+            pass: (() => {
+              const cw = FormulaEngine.calcCumulativeWeights([{ percentage: 20 }, { percentage: 30 }, { percentage: 50 }], 200);
+              return Math.abs(cw[0].cumulative - 40) < 1e-5 && Math.abs(cw[1].cumulative - 100) < 1e-5 && Math.abs(cw[2].cumulative - 200) < 1e-5;
+            })()
+          }
+        ];
+
+        vp.innerHTML = `
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title">Automated Mathematical & Hierarchical QA Suite (10/10)</span></div>
+            <div class="panel-body" style="display:grid;gap:8px;">
+              ${suite.map(t => `
+                <div class="ing-row-card" style="display:flex;justify-content:space-between;align-items:center;">
+                  <span>${t.name}</span>
+                  <span class="status-pill ${t.pass ? "pill-ok" : "pill-err"}">${t.pass ? "PASSED" : "FAILED"}</span>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      // --- SCREEN 13: BACKUP, RESTORE & SETTINGS ---
+      renderSettings(vp) {
+        vp.innerHTML = `
+          <div class="panel" style="max-width:560px;margin:0 auto;">
+            <div class="panel-head"><span class="panel-title">Studio Preferences, JSON Backup & Restore</span></div>
+            <div class="panel-body" style="display:grid;gap:14px;">
+              <div class="field-group">
+                <label class="field-label">Interface Theme</label>
+                <select id="pref-theme" class="select">
+                  <option value="dark" ${document.documentElement.getAttribute("data-theme") === "dark" ? "selected" : ""}>Obsidian & Champagne Gold (Dark)</option>
+                  <option value="light" ${document.documentElement.getAttribute("data-theme") === "light" ? "selected" : ""}>Parchment Ivory (Light)</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label">Display Currency Symbol</label>
+                <select id="pref-currency" class="select">
+                  <option value="₹" ${this.currency === "₹" ? "selected" : ""}>₹ Indian Rupee (INR)</option>
+                  <option value="$" ${this.currency === "$" ? "selected" : ""}>$ US Dollar (USD)</option>
+                  <option value="€" ${this.currency === "€" ? "selected" : ""}>€ Euro (EUR)</option>
+                  <option value="AED " ${this.currency === "AED " ? "selected" : ""}>AED Dirham</option>
+                </select>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--border-subtle);">
+                <button class="btn btn-gold" id="btn-backup-json">Export Full JSON Backup</button>
+                <label class="btn btn-outline" style="cursor:pointer;">
+                  Import JSON Backup
+                  <input type="file" id="file-restore-json" accept=".json" style="display:none;">
+                </label>
+                <button class="btn btn-danger" id="btn-factory-reset">Reset Sample Database</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        vp.querySelector("#pref-theme").onchange = e => {
+          document.documentElement.setAttribute("data-theme", e.target.value);
+        };
+
+        vp.querySelector("#pref-currency").onchange = e => {
+          this.currency = e.target.value;
+          localStorage.setItem("attarlab_currency", this.currency);
+          this.toast(`Currency updated to ${this.currency}`);
+        };
+
+        vp.querySelector("#btn-backup-json").onclick = () => {
+          const payload = {
+            app: "AttarLab Pro",
+            schemaVersion: 3,
+            exportedAt: new Date().toISOString(),
+            ingredients: this.ingredients,
+            formulas: this.formulas,
+            attarLogs: this.attarLogs
+          };
+          const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = `AttarLabPro_Backup_${Date.now()}.json`;
+          a.click();
+          this.toast("Backup exported");
+        };
+
+        vp.querySelector("#file-restore-json").onchange = async e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            if (!Array.isArray(data.ingredients) || !Array.isArray(data.formulas)) {
+              throw new Error("Invalid backup file structure.");
+            }
+            for (const ing of data.ingredients) await this.db.put("ingredients", ing);
+            for (const form of data.formulas) await this.db.put("formulas", form);
+            if (Array.isArray(data.attarLogs)) {
+              for (const log of data.attarLogs) await this.db.put("attar_logs", log);
+            }
+            await this.reloadDatabase();
+            this.activeFormula = JSON.parse(JSON.stringify(this.formulas[0]));
+            this.toast(`Restored ${data.ingredients.length} materials & ${data.formulas.length} formulas`);
+            this.navigate("studio");
+          } catch (err) {
+            this.toast("Restore failed: " + err.message);
+          }
+        };
+
+        vp.querySelector("#btn-factory-reset").onclick = async () => {
+          const ok = await this.confirmDialog(
+            "Reset to Factory Sample Data?",
+            "This will erase custom records and restore the default Kannauj Attar & Sub-Accord database.",
+            "Reset Database"
+          );
+          if (!ok) return;
+          indexedDB.deleteDatabase("AttarLabPro_v2");
+          location.reload();
+        };
+      }
+    }
+
+       // --- 4. PWA INSTALL PROMPT & PNG ICON GENERATOR ---
+    let deferredInstallPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+
+      const actionsBar = document.querySelector(".topbar-actions");
+      if (actionsBar && !document.getElementById("btn-pwa-install")) {
+        const installBtn = document.createElement("button");
+        installBtn.id = "btn-pwa-install";
+        installBtn.className = "btn btn-gold btn-sm";
+        installBtn.textContent = "📲 Install";
+        installBtn.onclick = async () => {
+          if (!deferredInstallPrompt) return;
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+          deferredInstallPrompt = null;
+          installBtn.remove();
+        };
+        actionsBar.prepend(installBtn);
+      }
+    });
+
+    // Helper to generate real icon-192.png & icon-512.png from logo.svg
+    window.downloadPWAIcons = async () => {
+      const res = await fetch("./logo.svg");
+      const svgText = await res.text();
+      const svgBlob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(svgBlob);
+
+      for (const size of [192, 512]) {
+        const img = new Image();
+        await new Promise((resolve) => {
+          img.onload = resolve;
+          img.src = url;
+        });
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, size, size);
+
+        const pngUrl = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = pngUrl;
+        a.download = `icon-${size}.png`;
+        a.click();
+      }
+      URL.revokeObjectURL(url);
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const app = new AttarLabStudio();
+      app.init();
+    });
+
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+    }
+      </script>
+</body>
+</html>
