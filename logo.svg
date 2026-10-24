@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141821"/>
+      <stop offset="50%" stop-color="#090b0e"/>
+      <stop offset="100%" stop-color="#050608"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5df98"/>
+      <stop offset="45%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#9a7418"/>
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#e6c65a" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#d9822b" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Maskable App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Olfactory Radar Rings -->
+  <circle cx="256" cy="272" r="185" fill="none" stroke="url(#goldGrad)" stroke-opacity="0.16" stroke-width="2"/>
+  <circle cx="256" cy="272" r="142" fill="none" stroke="url(#goldGrad)" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="6 8"/>
+  <circle cx="256" cy="272" r="105" fill="url(#amberGlow)"/>
+
+  <!-- Outer Geometric Kannauj Octagon Crest -->
+  <polygon points="256,46 398,105 456,247 398,389 256,448 114,389 56,247 114,105" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.45"/>
+
+  <!-- Attar Flacon Stopper / Finial -->
+  <path d="M256 74 L282 114 L268 144 H244 L230 114 Z" fill="url(#goldGrad)"/>
+  <rect x="234" y="148" width="44" height="14" rx="4" fill="url(#goldGrad)"/>
+  <path d="M226 166 H286 L278 194 H234 Z" fill="none" stroke="url(#goldGrad)" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Flacon Body (Vessel) -->
+  <path d="M234 194 C178 214, 146 262, 146 320 C146 382, 194 422, 256 422 C318 422, 366 382, 366 320 C366 262, 334 214, 278 194 Z" fill="#10141d" stroke="url(#goldGrad)" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- Golden Attar Oil Level Inside Vessel -->
+  <path d="M162 326 C195 342, 317 310, 350 326 C347 374, 308 406, 256 406 C204 406, 165 374, 162 326 Z" fill="url(#goldGrad)" fill-opacity="0.88"/>
+
+  <!-- Central Hydro-Distillation Essence Drop -->
+  <path d="M256 232 C256 232, 218 282, 218 310 C218 331, 235 348, 256 348 C277 348, 294 331, 294 310 C294 282, 256 232, 256 232 Z" fill="url(#goldGrad)"/>
+  <circle cx="244" cy="312" r="7" fill="#090b0e" opacity="0.35"/>
+
+  <!-- Base Pedestal Line -->
+  <rect x="196" y="432" width="120" height="8" rx="4" fill="url(#goldGrad)"/>
+</svg>
