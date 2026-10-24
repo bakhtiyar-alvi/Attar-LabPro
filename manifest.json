@@ -1,0 +1,49 @@
+{
+  "id": "./index.html",
+  "name": "AttarLab Pro — Perfumery & Attar Studio",
+  "short_name": "AttarLab Pro",
+  "description": "Professional Kannauj Attar, Essential Oil & Fine Perfumery Formulation Studio with IFRA 51st compliance and nested sub-accords.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090b0e",
+  "theme_color": "#090b0e",
+  "categories": ["productivity", "utilities", "business"],
+  "icons": [
+    {
+      "src": "./logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Formulation Studio",
+      "short_name": "Studio",
+      "description": "Open the active fragrance workbench",
+      "url": "./index.html#studio",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Gravimetric Batch Sheet",
+      "short_name": "Batch Scale",
+      "description": "Open cumulative bench weighing checklist",
+      "url": "./index.html#batch",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
